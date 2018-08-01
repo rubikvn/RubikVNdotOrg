@@ -23,5 +23,5 @@ class Viresults(models.Model):
         db_table = 'ViResults'
 
     def __str__(self):
-        return f"{}"
+        return f"{self.competitionid} - {self.eventid}: {self.personname} ({self.personid}). Best: {self.best}. Average: {self.average}"
         # TODO write something

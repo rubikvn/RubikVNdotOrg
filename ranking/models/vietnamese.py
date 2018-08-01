@@ -13,4 +13,4 @@ class Vietnamese(models.Model):
         db_table = 'Vietnamese'
 
     def __str__(self):
-        return f"{id} - {name}, {gender}"
+        return f"{self.id} - {self.name}, {self.gender}"

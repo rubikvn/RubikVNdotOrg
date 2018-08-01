@@ -1,0 +1,16 @@
+{% extends "ranking/layout.html" %}
+
+{% block title %}
+Ranking for {{ event_name }}
+{% endblock %}
+
+{% block body %}
+  <h1>Ranking for {{ event_name }} in Vietnam</h1>
+  <ol>
+    {% for result in results %}
+    {# <li>{{ result.0 }}, {{ result.1 }}, {{ result.2 }}, {{ result.3 }}</li> #}
+    <li>{{ result }}</li>
+    {% empty %}
+    <li>No result found.</li>
+    {% endfor %}
+{% endblock %}

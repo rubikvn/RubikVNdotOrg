@@ -1,2 +1,2 @@
-from .viresults import ViResults
+from .viresults import Viresults
 from .vietnamese import Vietnamese
