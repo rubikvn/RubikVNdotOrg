@@ -1,0 +1,7 @@
+__pycache__/
+backups/
+rbvn-env/
+*.log
+*.pot
+*.pyc
+local_settings.py
