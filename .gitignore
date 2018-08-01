@@ -5,3 +5,4 @@ rbvn-env/
 *.pot
 *.pyc
 local_settings.py
+*.sql
