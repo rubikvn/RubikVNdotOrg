@@ -6,3 +6,4 @@ rbvn-env/
 *.pyc
 local_settings.py
 *.sql
+*.txt
