@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'RubikVNdotOrg.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'wca',
+        'NAME': 'rubikvn',
         'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': 'localhost',

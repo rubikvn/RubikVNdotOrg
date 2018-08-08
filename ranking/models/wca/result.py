@@ -1,6 +1,7 @@
 from django.db import models
 
-class Viresults(models.Model):
+class Result(models.Model):
+    id = models.AutoField(primary_key=True)
     competitionid = models.CharField(db_column='competitionId', max_length=32)  # Field name made lowercase.
     eventid = models.CharField(db_column='eventId', max_length=6)  # Field name made lowercase.
     roundtypeid = models.CharField(db_column='roundTypeId', max_length=1)  # Field name made lowercase.
@@ -20,8 +21,18 @@ class Viresults(models.Model):
     regionalaveragerecord = models.CharField(db_column='regionalAverageRecord', max_length=3, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        db_table = 'ViResults'
+        db_table = 'Results'
 
-    def __str__(self):
-        return f"{self.competitionid} - {self.eventid}: {self.personname} ({self.personid}). Best: {self.best}. Average: {self.average}"
-        # TODO write something
+
+class Scramble(models.Model):
+    scrambleid = models.PositiveIntegerField(db_column='scrambleId', primary_key=True)  # Field name made lowercase.
+    competitionid = models.CharField(db_column='competitionId', max_length=32)  # Field name made lowercase.
+    eventid = models.CharField(db_column='eventId', max_length=6)  # Field name made lowercase.
+    roundtypeid = models.CharField(db_column='roundTypeId', max_length=1)  # Field name made lowercase.
+    groupid = models.CharField(db_column='groupId', max_length=3)  # Field name made lowercase.
+    isextra = models.IntegerField(db_column='isExtra')  # Field name made lowercase.
+    scramblenum = models.IntegerField(db_column='scrambleNum')  # Field name made lowercase.
+    scramble = models.TextField()
+
+    class Meta:
+        db_table = 'Scrambles'
