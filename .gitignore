@@ -7,3 +7,4 @@ rbvn-env/
 local_settings.py
 *.sql
 *.txt
+!requirements.txt
