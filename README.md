@@ -23,7 +23,7 @@ git clone git@gitlab.com:rubikvn/rubikvn.git
 ```bash
 cd rubikvn/
 sudo python3 -m pip install virtualenv
-virtualenv rbvn-env/ -m python3
+virtualenv rbvn-env/ -p python3
 source rbvn-env/bin/activate
 ```
 
