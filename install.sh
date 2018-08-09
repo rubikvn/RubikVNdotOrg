@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Install & set up virtualenv and project dependencies
+echo "Installing and setting up virtualenv..."
 sudo python3 -m pip install virtualenv
 virtualenv rbvn-env/ -p python3
 source rbvn-env/bin/activate
