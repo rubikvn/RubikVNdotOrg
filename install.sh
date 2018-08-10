@@ -2,10 +2,12 @@
 
 # Install & set up virtualenv and project dependencies
 echo "Installing and setting up virtualenv..."
-sudo python3 -m pip install virtualenv
-virtualenv rbvn-env/ -p python3
+sudo apt install python3.6-dev
+sudo apt install libmysqlclient-dev
+sudo python3.6 -m pip install virtualenv
+virtualenv rbvn-env/ -p python3.6
 source rbvn-env/bin/activate
-python3 -m pip install -r requirements.txt
+pip install -r requirements.txt
 
 echo -n "Your root user password for MySQL: "
 read -s MYSQL_PASSWORD
@@ -17,8 +19,8 @@ echo "CREATE DATABASE IF NOT EXISTS wca; CREATE DATABASE IF NOT EXISTS rubikvn;"
 
 # Create the database schema
 echo "Making migrations for Django project"
-python3 manage.py makemigrations
-python3 manage.py migrate
+python3.6 manage.py makemigrations
+python3.6 manage.py migrate
 
 # Download & import WCA database
 echo "Downloading WCA database export..."
