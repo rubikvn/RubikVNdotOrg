@@ -5,7 +5,10 @@ class Event(models.Model):
     name = models.CharField(max_length=54)
     rank = models.IntegerField()
     format = models.CharField(max_length=10)
-    cellname = models.CharField(db_column='cellName', max_length=45)  # Field name made lowercase.
+    cellname = models.CharField(db_column='cellName', max_length=45)
 
     class Meta:
         db_table = 'Events'
+
+    def __str__(self):
+        return f"Event name: {self.name}, format: {self.format}"
