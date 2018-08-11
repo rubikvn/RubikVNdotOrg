@@ -1,0 +1,37 @@
+*{}
+
+input.form-control.singleBtn {
+    border-radius: 12px;
+}
+
+input.form-control.singleBtn:hover {
+    background: #f96332;
+}
+
+input.form-control.avgBtn {
+    border-radius: 14px;
+}
+
+input.form-control.avgBtn:hover {
+    background: #f96332;
+}
+body{
+	font-family: 'Lato', sans-serif;
+}
+.new-event h1 {
+    letter-spacing: 3.5px;
+}
+.wrapper1 {
+    background: #fbf8f8;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+/*nav.navbar.navbar-default {
+    margin-bottom: 200px;
+}*/
+
+img.img-responsive {
+    background: inherit;
+    /* border-radius: 125px; */
+}

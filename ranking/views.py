@@ -6,9 +6,11 @@ from .models import *
 from django.db.models import Min
 
 # TODO: create views
+def rank(request):
+    #return HttpResponse("You are at the ranking index page.")
+    return render(request, "ranking/rank.html")
 def index(request):
-    return HttpResponse("You are at the ranking index page.")
-
+    return render(request, "ranking/index.html")
 # def person(request, wca_id):
 #     try:
 #         person = Vietnamese.objects.get(pk = wca_id)

@@ -5,12 +5,102 @@ Ranking for {{ event_name }}
 {% endblock %}
 
 {% block body %}
-  <h1>Ranking for {{ event_name }} in Vietnam</h1>
+  {% comment %} <h1>Ranking for {{ event_name }} in Vietnam</h1>
   <ol>
     {% for result in results %}
     {# <li>{{ result.personid }}, {{ result.pk }}</li> #}
     <li>{{ result }}</li>
     {% empty %}
     <li>No result found.</li>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
+
+    <div class="main">
+		<div class="page-title">
+			<h1 class="text-center">
+				Ranking
+			</h1>
+		</div>
+		<div class="filter">
+			<div class="container">
+				<div class="row">
+					<form action="get" class="form-inline">
+						<div class="form-group">
+							<label for="eventId">
+								Event
+								<br>
+								<select name="eventId" id="eventId" class="drop form-control">
+									<option value="333" selected="selected">3x3x3</option>
+									<option value="222" >2x2x2</option>
+									<option value="444" >4x4x4</option>
+									<option value="555" >5x5x5</option>
+								</select>
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="limit">
+								Limit
+								<br>
+								<select name="limit" id="limit" class="drop form-control">
+									<option value="100+" selected="selected">100 Persons</option>
+									<option value="500+">500 Persons</option>
+									<option value="1000+">1000 Persons</option>
+									<option value="All">All</option>
+								</select>
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="">
+								<br >
+								<input type="submit" class="form-control singleBtn" value="Single">
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="">
+								<br >
+								<input type="submit" class="form-control avgBtn" value="Average" >
+							</label>
+						</div>
+						
+					</form>
+
+				</div>
+			</div>
+			
+		</div>
+		<div class="ranking-table">
+			<div class="container">
+			       
+			  <table class="table table-striped">
+			    <thead>
+			      <tr>
+			        <th>Rank</th>
+			        <th>Person</th>
+			        <th>Result</th>
+			        <th>Competition</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td>1</td>
+			        <td><a href="">Nguyễn Ngọc Thịnh</a></td>
+			        <td>5.68</td>
+			        <td>Hanoi Open 2018</td>
+			      </tr>
+			      <tr>
+			        <td>2</td>
+			        <td><a href="">Tomas Nguyen</a></td>
+			        <td>6.12</td>
+			        <td>Slovakian Spring 2018</td>
+			      </tr>
+			      <tr>
+			        <td>3</td>
+			        <td><a href="">Phạm Anh Khoa</a></td>
+			        <td>6.95</td>
+			        <td>Techweek NZ 2017</td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</div>
+		</div>
+	</div>
 {% endblock %}
