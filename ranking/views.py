@@ -5,5 +5,9 @@ from django.urls import reverse
 from .models import *
 
 # TODO: create views
+def rank(request):
+    return render(request, "ranking/rank.html")
+    
+    
 def index(request):
-    return HttpResponse("You are at the ranking index page.")
+    return render(request, "ranking/index.html")
