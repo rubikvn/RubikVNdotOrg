@@ -1,9 +1,21 @@
 {% extends "ranking/layout.html" %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'ranking/rank.css' %}">
+{% endblock %}
 
 {% block title %}
 Ranking for {{ event_name }}
 {% endblock %}
-
+{% block script %}
+	<script>
+		$(document).ready(function(){
+			$(".filter-engine").click(function(){
+				$(".extra-filters").toggle('slow');
+			});
+		});
+	</script>
+{% endblock %}
 {% block body %}
   {% comment %} <h1>Ranking for {{ event_name }} in Vietnam</h1>
   <ol>
@@ -14,59 +26,110 @@ Ranking for {{ event_name }}
     <li>No result found.</li>
     {% endfor %} {% endcomment %}
 
-    <div class="main">
-		<div class="page-title">
-			<h1 class="text-center">
-				Ranking
-			</h1>
-		</div>
-		<div class="filter">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container">
-				<div class="row">
-					<form action="{{ request.get_full_path }}" method="get" class="form-inline">
-						<div class="form-group">
-							<label for="eventid">
-								Event
-								<br>
-								<select name="eventid" id="eventid" class="drop form-control">
-									<option value="333" selected="selected">3x3x3</option>
-									<option value="222" >2x2x2</option>
-									<option value="444" >4x4x4</option>
-									<option value="555" >5x5x5</option>
-								</select>
-							</label>
-						</div>
-						<div class="form-group">
-							<label for="limit">
-								Limit
-								<br>
-								<select name="limit" id="limit" class="drop form-control">
-									<option value="100" selected="selected">100 Persons</option>
-									<option value="500">500 Persons</option>
-									<option value="1000">1000 Persons</option>
-									<option value="All">All</option>
-								</select>
-							</label>
-						</div>
-						<div class="form-group">
-							<label for="">
-								<br >
-								<input type="submit" name="category" class="form-control singleBtn" value="single">
-							</label>
-						</div>
-						<div class="form-group">
-							<label for="">
-								<br >
-								<input type="submit" name="category" class="form-control avgBtn" value="average" >
-							</label>
-						</div>
-
-					</form>
-
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#"><span><img src="{% static "ranking/logo.png"%}" alt="">	</span>   CubingVN</a>
 				</div>
+		
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/ranking/result">Ranking</a></li>
+						<li><a href="#">Events</a></li>
+						<li><a href="#">Beginners</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
 			</div>
-
-		</div>
+		</nav>
+		<div class="main">
+			<div class="page-title">
+				<h1 class="text-center">
+					Ranking
+				</h1>
+			</div>
+			<div class="filter">
+				<div class="container">
+					<div class="row">
+						<form action="get" >
+							<div class="form-group row">
+								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input type="text" class="form-control " placeholder="Competitor name">
+								</div>
+								<button class="btn btn-primary" type="submit">Find</button>
+								<a class="filter-engine btn btn-danger">More Filters</a>
+									
+							</div>
+	
+							
+						</form>
+						
+						
+						
+					</div>
+				</div>
+				<div class="container extra-filters">
+					<div class="row">
+						<form action="{{ request.get_full_path }}" method="get" class="form-inline">
+							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+								<div class="form-group">	
+																<label for="eventId">
+										Event:
+										
+										<select name="eventid" id="eventid" class="drop form-control">
+											<option value="333" selected="selected">3x3x3</option>
+											<option value="222" >2x2x2</option>
+											<option value="444" >4x4x4</option>
+											<option value="555" >5x5x5</option>
+										</select>
+									</label>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="form-group">
+									<label for="limit">
+										Limit:
+										
+										<select name="limit" id="limit" class="drop form-control">
+											<option value="100" selected="selected">100 Persons</option>
+											<option value="500">500 Persons</option>
+											<option value="1000">1000 Persons</option>
+											<option value="All">All</option>
+										</select>
+									</label>
+								</div>
+							</div>
+							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+								<div class="form-group">
+									<label for="">
+										
+										<input type="submit" class="form-control singleBtn" value="single" name="category">
+									</label>
+								</div>
+								<div class="form-group">
+									<label for="">
+										
+										<input type="submit" class="form-control avgBtn" value="average" name="category" >
+									</label>
+								</div>
+							</div>
+							
+							
+						</form>
+	
+					</div>
+				</div>
+				
+			</div>
 		<div class="ranking-table">
 			<div class="container">
 

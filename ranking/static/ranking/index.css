@@ -1,20 +1,5 @@
 *{}
-
-input.form-control.singleBtn {
-    border-radius: 12px;
-}
-
-input.form-control.singleBtn:hover {
-    background: #f96332;
-}
-
-input.form-control.avgBtn {
-    border-radius: 14px;
-}
-
-input.form-control.avgBtn:hover {
-    background: #f96332;
-}
+/* Css for index page */
 body{
 	font-family: 'Lato', sans-serif;
 }
@@ -35,3 +20,4 @@ img.img-responsive {
     background: inherit;
     /* border-radius: 125px; */
 }
+

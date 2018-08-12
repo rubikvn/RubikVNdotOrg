@@ -1,6 +1,8 @@
 {% extends "ranking/layout.html" %}
 {% load static %}
-
+{% block style %}
+    <link rel="stylesheet" href="{% static 'ranking/index.css' %}">
+{% endblock %}
 {% block title %}
 Ranking for {{ event_name }}
 {% endblock %}
@@ -23,7 +25,7 @@ Ranking for {{ event_name }}
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Ranking</a></li>
+                    <li><a href="/ranking/result">Ranking</a></li>
                     <li><a href="#">Events</a></li>
                     <li><a href="#">Beginners</a></li>
                     <li><a href="#">Contact</a></li>
