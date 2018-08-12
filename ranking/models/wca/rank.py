@@ -16,8 +16,13 @@ class Rankaverage(models.Model):
         return f"WCA ID: {self.personid}, event: {self.eventid} (average), result:{self.best} (WR{self.worldrank}, CR{self.continentrank}, NR{self.countryrank})"
 
     @staticmethod
-    def get_rank_average(event='333', top='100'):
-        pass
+    def get_rank_average(eventid='333', limit='100'):
+        if limit == 'All':
+            limit = None
+        else:
+            limit = int(limit)
+        results = Rankaverage.objects.filter(eventid = eventid).order_by('best')[:limit]
+        return results
 
 
 class Ranksingle(models.Model):
@@ -34,3 +39,12 @@ class Ranksingle(models.Model):
 
     def __str__(self):
         return f"WCA ID: {self.personid}, event: {self.eventid} (single), result:{self.best} (WR{self.worldrank}, CR{self.continentrank}, NR{self.countryrank})"
+
+    @staticmethod
+    def get_rank_single(eventid='333', limit='100'):
+        if limit == 'All':
+            limit = None
+        else:
+            limit = int(limit)
+        results = Ranksingle.objects.filter(eventid = eventid).order_by('best')[:limit]
+        return results
