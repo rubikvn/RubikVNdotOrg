@@ -53,6 +53,8 @@ db_setup ()
   echo "Reading from database wca and creating new database rubikvn..."
   pv vn_db_export.sql | cat | mysql -u root --password=$MYSQL_PASSWORD
 
+  echo "Database updated on `date`" >> database_update.log
+
   echo "-------------------------------"
   echo "Done setting up MySQL database."
 }
