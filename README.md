@@ -29,7 +29,7 @@ rubikvn/
     README.md
     requirements.txt
 ```
-The idea here is RubikVNdotOrg consists of all config files for our website. It's like the index page of our back end. The big project will be made of multiple smaller "apps", like `ranking/`, each app directory will have both the back end and front end code in it, but they are put in separate subdirectories, so it is pretty clear where you should put your code. When you clone the directory from gitlab, follow the instructions below, and don't delete anything.
+The idea here is RubikVNdotOrg consists of all config files for our website. It's like the index page of our back end. The big project will be made of multiple smaller "apps", like `ranking/`, each app directory will have both the back end and front end code in it, but they are put in separate subdirectories, so it is pretty clear where you should put your code. When you clone the directory from gitlab, follow the [instructions](#cloning-the-repo-running-the-server-first-time) below, and don't delete anything.
 
 ### Current progress
 
