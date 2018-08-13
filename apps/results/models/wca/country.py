@@ -7,6 +7,7 @@ class Country(models.Model):
     iso2 = models.CharField(max_length=2, blank=True, null=True)
 
     class Meta:
+        managed = False
         db_table = 'Countries'
 
     def __str__(self):

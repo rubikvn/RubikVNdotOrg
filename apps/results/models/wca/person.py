@@ -8,6 +8,7 @@ class Person(models.Model):
     gender = models.CharField(max_length=1, blank=True, null=True)
 
     class Meta:
+        managed = False
         db_table = 'Persons'
 
     def __str__(self):

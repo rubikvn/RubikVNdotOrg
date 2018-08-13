@@ -8,6 +8,7 @@ class Event(models.Model):
     cellname = models.CharField(db_column='cellName', max_length=45)
 
     class Meta:
+        managed = False
         db_table = 'Events'
 
     def __str__(self):

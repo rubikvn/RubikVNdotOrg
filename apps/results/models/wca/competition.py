@@ -23,6 +23,7 @@ class Competition(models.Model):
     longitude = models.IntegerField(blank=True, null=True)
 
     class Meta:
+        managed = False
         db_table = 'Competitions'
 
     def __str__(self):
@@ -35,6 +36,7 @@ class Championship(models.Model):
     championship_type = models.CharField(max_length=191)
 
     class Meta:
+        managed = False
         db_table = 'championships'
 
     def __str__(self):
@@ -47,6 +49,7 @@ class EligibleCountryIso2SForChampionship(models.Model):
     eligible_country_iso2 = models.CharField(max_length=191)
 
     class Meta:
+        managed = False
         db_table = 'eligible_country_iso2s_for_championship'
 
     def __str__(self):

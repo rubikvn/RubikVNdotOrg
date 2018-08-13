@@ -10,6 +10,7 @@ class Format(models.Model):
     trim_slowest_n = models.IntegerField()
 
     class Meta:
+        managed = False
         db_table = 'Formats'
 
     def __str__(self):

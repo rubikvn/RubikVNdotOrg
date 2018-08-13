@@ -4,7 +4,7 @@ from django.urls import reverse
 
 from .models import *
 
-def rank(request):
+def ranking(request):
     eventid = request.GET.get("eventid", "333")
     limit = request.GET.get("limit", "100")
     category = request.GET.get("category", "single")
@@ -23,7 +23,7 @@ def rank(request):
         "event_name": eventid,
         "results": results
     }
-    return render(request, "results/rank.html", context)
+    return render(request, "results/ranking.html", context)
 
 
 def index(request):

@@ -21,6 +21,7 @@ class Result(models.Model):
     regionalaveragerecord = models.CharField(db_column='regionalAverageRecord', max_length=3, blank=True, null=True)
 
     class Meta:
+        managed = False
         db_table = 'Results'
 
     def __str__(self):
@@ -39,6 +40,7 @@ class Scramble(models.Model):
     scramble = models.TextField()
 
     class Meta:
+        managed = False
         db_table = 'Scrambles'
 
     def __str__(self):

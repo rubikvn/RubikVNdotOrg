@@ -8,6 +8,7 @@ class Roundtype(models.Model):
     final = models.IntegerField()
 
     class Meta:
+        managed = False
         db_table = 'RoundTypes'
 
     def __str__(self):
@@ -18,6 +19,7 @@ class Round(models.Model):
     sorry_message = models.CharField(max_length=172)
 
     class Meta:
+        managed = False
         db_table = 'Rounds'
 
     def __str__(self):

@@ -10,6 +10,7 @@ class Rankaverage(models.Model):
     countryrank = models.IntegerField(db_column='countryRank')
 
     class Meta:
+        managed = False
         db_table = 'RanksAverage'
 
     def __str__(self):
@@ -35,6 +36,7 @@ class Ranksingle(models.Model):
     countryrank = models.IntegerField(db_column='countryRank')
 
     class Meta:
+        managed = False
         db_table = 'RanksSingle'
 
     def __str__(self):

@@ -9,6 +9,7 @@ class Continent(models.Model):
     zoom = models.IntegerField()
 
     class Meta:
+        managed = False
         db_table = 'Continents'
 
     def __str__(self):
