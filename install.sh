@@ -17,13 +17,16 @@ initialize ()
 
 db_setup ()
 {
+  source rbvn-env/bin/activate
+
   echo -n "Your root user password for MySQL: "
   read -s MYSQL_PASSWORD
   echo
 
   # Create mysql database named wca
   echo "Importing the database export..."
-  echo "CREATE DATABASE IF NOT EXISTS wca; CREATE DATABASE IF NOT EXISTS rubikvn;" | mysql -u root --password=$MYSQL_PASSWORD
+  echo "DROP DATABASE IF EXISTS wca; DROP DATABASE IF EXISTS rubikvn;" | mysql -u root --password=$MYSQL_PASSWORD
+  echo "CREATE DATABASE wca; CREATE DATABASE rubikvn;" | mysql -u root --password=$MYSQL_PASSWORD
 
   # Create the database schema
   echo "Making migrations for Django project"

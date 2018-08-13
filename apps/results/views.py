@@ -23,8 +23,8 @@ def rank(request):
         "event_name": eventid,
         "results": results
     }
-    return render(request, "ranking/rank.html", context)
+    return render(request, "results/rank.html", context)
 
 
 def index(request):
-    return render(request, "ranking/index.html")
+    return render(request, "results/index.html")

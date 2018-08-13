@@ -4,9 +4,9 @@ from . import views
 
 # Create url scheme
 urlpatterns = [
-    path("result", views.rank, name="rank"),
+    path("ranking/", views.rank, name="rank"),
     path("", views.index, name="index"),
-    
+
     # path("ranks/", views.rank, name="rank"),
     # path("<slug:wca_id>/", views.person, name="person"),
 ]

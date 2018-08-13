@@ -1,7 +1,8 @@
-{% extends "ranking/layout.html" %}
+{% extends "results/layout.html" %}
 {% load static %}
+
 {% block style %}
-    <link rel="stylesheet" href="{% static 'ranking/rank.css' %}">
+    <link rel="stylesheet" href="{% static 'results/rank.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -16,17 +17,9 @@ Ranking for {{ event_name }}
 		});
 	</script>
 {% endblock %}
-{% block body %}
-  {% comment %} <h1>Ranking for {{ event_name }} in Vietnam</h1>
-  <ol>
-    {% for result in results %}
-    {# <li>{{ result.personid }}, {{ result.pk }}</li> #}
-    <li>{{ result }}</li>
-    {% empty %}
-    <li>No result found.</li>
-    {% endfor %} {% endcomment %}
 
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+{% block body %}
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -36,14 +29,14 @@ Ranking for {{ event_name }}
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><span><img src="{% static "ranking/logo.png"%}" alt="">	</span>   CubingVN</a>
+					<a class="navbar-brand" href="#"><span><img src="{% static "results/logo.png"%}" alt="">	</span>   CubingVN</a>
 				</div>
-		
+
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
-					
+
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="/ranking/result">Ranking</a></li>
+						<li><a href="ranking/">Ranking</a></li>
 						<li><a href="#">Events</a></li>
 						<li><a href="#">Beginners</a></li>
 						<li><a href="#">Contact</a></li>
@@ -67,24 +60,24 @@ Ranking for {{ event_name }}
 								</div>
 								<button class="btn btn-primary" type="submit">Find</button>
 								<a class="filter-engine btn btn-danger">More Filters</a>
-									
+
 							</div>
-	
-							
+
+
 						</form>
-						
-						
-						
+
+
+
 					</div>
 				</div>
 				<div class="container extra-filters">
 					<div class="row">
 						<form action="{{ request.get_full_path }}" method="get" class="form-inline">
 							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-								<div class="form-group">	
+								<div class="form-group">
 																<label for="eventId">
 										Event:
-										
+
 										<select name="eventid" id="eventid" class="drop form-control">
 											<option value="333" selected="selected">3x3x3</option>
 											<option value="222" >2x2x2</option>
@@ -98,7 +91,7 @@ Ranking for {{ event_name }}
 								<div class="form-group">
 									<label for="limit">
 										Limit:
-										
+
 										<select name="limit" id="limit" class="drop form-control">
 											<option value="100" selected="selected">100 Persons</option>
 											<option value="500">500 Persons</option>
@@ -111,24 +104,24 @@ Ranking for {{ event_name }}
 							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 								<div class="form-group">
 									<label for="">
-										
+
 										<input type="submit" class="form-control singleBtn" value="single" name="category">
 									</label>
 								</div>
 								<div class="form-group">
 									<label for="">
-										
+
 										<input type="submit" class="form-control avgBtn" value="average" name="category" >
 									</label>
 								</div>
 							</div>
-							
-							
+
+
 						</form>
-	
+
 					</div>
 				</div>
-				
+
 			</div>
 		<div class="ranking-table">
 			<div class="container">
@@ -151,26 +144,8 @@ Ranking for {{ event_name }}
               <!-- <td>{{ result }}</td> -->
             </tr>
             {% empty %}
-              <td>No value available</td>
+              No value available
             {% endfor %}
-			      <!-- <tr>
-			        <td>1</td>
-			        <td><a href="">Nguyễn Ngọc Thịnh</a></td>
-			        <td>5.68</td>
-			        <td>Hanoi Open 2018</td>
-			      </tr>
-			      <tr>
-			        <td>2</td>
-			        <td><a href="">Tomas Nguyen</a></td>
-			        <td>6.12</td>
-			        <td>Slovakian Spring 2018</td>
-			      </tr>
-			      <tr>
-			        <td>3</td>
-			        <td><a href="">Phạm Anh Khoa</a></td>
-			        <td>6.95</td>
-			        <td>Techweek NZ 2017</td>
-			      </tr> -->
 			    </tbody>
 			  </table>
 			</div>

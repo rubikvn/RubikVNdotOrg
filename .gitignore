@@ -3,6 +3,7 @@ __pycache__/
 backups/
 rbvn-env/
 .vscode/
+.archive/
 
 # File formats
 *.log
