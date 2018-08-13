@@ -1,10 +1,16 @@
+# Directories
 __pycache__/
 backups/
 rbvn-env/
+.vscode/
+
+# File formats
 *.log
 *.pot
 *.pyc
-local_settings.py
 *.sql
 *.txt
+
+# Specific files
+local_settings.py
 !requirements.txt
