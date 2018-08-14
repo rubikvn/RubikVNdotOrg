@@ -138,8 +138,8 @@ Ranking for {{ event_name }}
 			    <tbody>
             {% for result in results %}
             <tr>
-              <td>{{ forloop.counter }}</td>
-              <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid }}">{{ result.personid__name }}</a></td>
+              <td>{{ result.countryrank }}</td>
+              <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid }}" target="_blank">{{ result.personid__name }}</a></td>
               <td>{{ result.best }}</td>
               <!-- <td>{{ result }}</td> -->
             </tr>
@@ -150,5 +150,34 @@ Ranking for {{ event_name }}
 			  </table>
 			</div>
 		</div>
+		<div class="text-center">
+				<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							  <li class="page-item">
+								<a class="page-link" href="#" aria-label="Previous">
+								  <span aria-hidden="true">&laquo;</span>
+								  <span class="sr-only">Previous</span>
+								</a>
+							  </li>
+							{% for num in results.paginator.page_range%}
+							 	{% if num == results.number %}
+								 	<li class="page-item  active"><a class="page-link" href="#">{{ num }}</a></li>
+								{% elif num > results.number|add:'-4' and num < results.number|add:'4' %}
+									<li class="page-item"><a class="page-link" href="?page={{num}}&eventid={{ event_name }}&limit={{ limit }}&category={{ category }}">{{ num }}</a></li>
+							  	{% endif %}
+							{% endfor %}
+
+							<li>
+								<a class="page-link" href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							  </li>
+						</ul>
+				</nav>
+
+		</div>
+
+
 	</div>
 {% endblock %}
