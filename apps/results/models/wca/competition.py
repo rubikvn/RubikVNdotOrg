@@ -6,7 +6,7 @@ class Competition(models.Model):
     id = models.CharField(primary_key=True, max_length=32)
     name = models.CharField(max_length=50)
     cityname = models.CharField(db_column='cityName', max_length=50)
-    countryid = models.ForeignKey(Country, models.CASCADE, db_column='countryId')
+    countryid = models.ForeignKey(Country, models.DO_NOTHING, db_column='countryId')
     information = models.TextField(blank=True, null=True)
     year = models.PositiveSmallIntegerField()
     month = models.PositiveSmallIntegerField()

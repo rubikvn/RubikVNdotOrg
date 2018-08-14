@@ -8,16 +8,16 @@ from .person import Person
 from .round import RoundType
 
 class Result(models.Model):
-    competitionid = models.ForeignKey(Competition, models.CASCADE, db_column='competitionId')
-    eventid = models.ForeignKey(Event, models.CASCADE, db_column='eventId')
-    roundtypeid = models.ForeignKey(RoundType, models.CASCADE, db_column='roundTypeId')
+    competitionid = models.ForeignKey(Competition, models.DO_NOTHING, db_column='competitionId')
+    eventid = models.ForeignKey(Event, models.DO_NOTHING, db_column='eventId')
+    roundtypeid = models.ForeignKey(RoundType, models.DO_NOTHING, db_column='roundTypeId')
     pos = models.SmallIntegerField()
     best = models.IntegerField()
     average = models.IntegerField()
     personname = models.CharField(db_column='personName', max_length=80, blank=True, null=True)
-    personid = models.ForeignKey(Person, models.CASCADE, db_column='personId')
-    personcountryid = models.ForeignKey(Country, models.CASCADE, db_column='personCountryId', blank=True, null=True)
-    formatid = models.ForeignKey(Format, models.CASCADE, db_column='formatId')
+    personid = models.ForeignKey(Person, models.DO_NOTHING, db_column='personId')
+    personcountryid = models.ForeignKey(Country, models.DO_NOTHING, db_column='personCountryId', blank=True, null=True)
+    formatid = models.ForeignKey(Format, models.DO_NOTHING, db_column='formatId')
     value1 = models.IntegerField()
     value2 = models.IntegerField()
     value3 = models.IntegerField()
@@ -37,9 +37,9 @@ class Result(models.Model):
 
 class Scramble(models.Model):
     scrambleid = models.PositiveIntegerField(db_column='scrambleId', primary_key=True)
-    competitionid = models.ForeignKey(Competition, models.CASCADE, db_column='competitionId')
-    eventid = models.ForeignKey(Event, models.CASCADE, db_column='eventId')
-    roundtypeid = models.ForeignKey(RoundType, models.CASCADE, db_column='roundTypeId')
+    competitionid = models.ForeignKey(Competition, models.DO_NOTHING, db_column='competitionId')
+    eventid = models.ForeignKey(Event, models.DO_NOTHING, db_column='eventId')
+    roundtypeid = models.ForeignKey(RoundType, models.DO_NOTHING, db_column='roundTypeId')
     groupid = models.CharField(db_column='groupId', max_length=3)
     isextra = models.IntegerField(db_column='isExtra')
     scramblenum = models.IntegerField(db_column='scrambleNum')

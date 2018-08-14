@@ -2,14 +2,16 @@ from django.db import models
 
 from .person import Person
 from .event import Event
+from .competition import Competition
 
 class RankAverage(models.Model):
-    personid = models.ForeignKey(Person, models.CASCADE, db_column='personId')
-    eventid = models.ForeignKey(Event, models.CASCADE, db_column='eventId')
+    personid = models.ForeignKey(Person, models.DO_NOTHING, db_column='personId')
+    eventid = models.ForeignKey(Event, models.DO_NOTHING, db_column='eventId')
     best = models.IntegerField()
     worldrank = models.IntegerField(db_column='worldRank')
     continentrank = models.IntegerField(db_column='continentRank')
     countryrank = models.IntegerField(db_column='countryRank')
+    competitionid = models.ForeignKey(Competition, models.DO_NOTHING, db_column='competitionId')
 
     class Meta:
         managed = False
@@ -36,12 +38,13 @@ class RankAverage(models.Model):
 
 
 class RankSingle(models.Model):
-    personid = models.ForeignKey(Person, models.CASCADE, db_column='personId')
-    eventid = models.ForeignKey(Event, models.CASCADE, db_column='eventId')
+    personid = models.ForeignKey(Person, models.DO_NOTHING, db_column='personId')
+    eventid = models.ForeignKey(Event, models.DO_NOTHING, db_column='eventId')
     best = models.IntegerField()
     worldrank = models.IntegerField(db_column='worldRank')
     continentrank = models.IntegerField(db_column='continentRank')
     countryrank = models.IntegerField(db_column='countryRank')
+    competitionid = models.ForeignKey(Competition, models.DO_NOTHING, db_column='competitionId')
 
     class Meta:
         managed = False

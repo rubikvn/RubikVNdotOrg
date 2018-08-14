@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.core.paginator import Paginator
+
 from .models import *
 # from datetime import datetime
 
@@ -22,6 +23,7 @@ def ranking(request):
             result['best'] = f"{int(seconds/60):02d}:{seconds%60:05.2f}"
         else:
             result['best'] = f"{seconds:.2f}"
+
     paginator = Paginator(results, 25)
     page = request.GET.get('page')
     results = paginator.get_page(page)

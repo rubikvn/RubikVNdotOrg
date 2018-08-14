@@ -6,7 +6,7 @@ class Person(models.Model):
     id = models.CharField(primary_key=True, max_length=10)
     subid = models.IntegerField()
     name = models.CharField(max_length=80, blank=True, null=True)
-    countryid = models.ForeignKey(Country, models.CASCADE, db_column='countryId')
+    countryid = models.ForeignKey(Country, models.DO_NOTHING, db_column='countryId')
     gender = models.CharField(max_length=1, blank=True, null=True)
 
     class Meta:
