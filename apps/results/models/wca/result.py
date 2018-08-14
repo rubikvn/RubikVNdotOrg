@@ -1,17 +1,23 @@
 from django.db import models
 
+from .competition import Competition
+from .country import Country
+from .event import Event
+from .format import Format
+from .person import Person
+from .round import RoundType
+
 class Result(models.Model):
-    id = models.AutoField(primary_key=True)
-    competitionid = models.CharField(db_column='competitionId', max_length=32)
-    eventid = models.CharField(db_column='eventId', max_length=6)
-    roundtypeid = models.CharField(db_column='roundTypeId', max_length=1)
+    competitionid = models.ForeignKey(Competition, models.CASCADE, db_column='competitionId')
+    eventid = models.ForeignKey(Event, models.CASCADE, db_column='eventId')
+    roundtypeid = models.ForeignKey(RoundType, models.CASCADE, db_column='roundTypeId')
     pos = models.SmallIntegerField()
     best = models.IntegerField()
     average = models.IntegerField()
     personname = models.CharField(db_column='personName', max_length=80, blank=True, null=True)
-    personid = models.CharField(db_column='personId', max_length=10)
-    personcountryid = models.CharField(db_column='personCountryId', max_length=50, blank=True, null=True)
-    formatid = models.CharField(db_column='formatId', max_length=1)
+    personid = models.ForeignKey(Person, models.CASCADE, db_column='personId')
+    personcountryid = models.ForeignKey(Country, models.CASCADE, db_column='personCountryId', blank=True, null=True)
+    formatid = models.ForeignKey(Format, models.CASCADE, db_column='formatId')
     value1 = models.IntegerField()
     value2 = models.IntegerField()
     value3 = models.IntegerField()
@@ -31,9 +37,9 @@ class Result(models.Model):
 
 class Scramble(models.Model):
     scrambleid = models.PositiveIntegerField(db_column='scrambleId', primary_key=True)
-    competitionid = models.CharField(db_column='competitionId', max_length=32)
-    eventid = models.CharField(db_column='eventId', max_length=6)
-    roundtypeid = models.CharField(db_column='roundTypeId', max_length=1)
+    competitionid = models.ForeignKey(Competition, models.CASCADE, db_column='competitionId')
+    eventid = models.ForeignKey(Event, models.CASCADE, db_column='eventId')
+    roundtypeid = models.ForeignKey(RoundType, models.CASCADE, db_column='roundTypeId')
     groupid = models.CharField(db_column='groupId', max_length=3)
     isextra = models.IntegerField(db_column='isExtra')
     scramblenum = models.IntegerField(db_column='scrambleNum')

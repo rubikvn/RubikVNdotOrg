@@ -55,8 +55,27 @@ db_setup ()
 
   echo "Database updated on `date`" >> database_update.log
 
+  cd ../../
+
   echo "-------------------------------"
   echo "Done setting up MySQL database."
+}
+
+dj_migrate ()
+{
+  source rbvn-env/bin/activate
+
+  echo -n "Your root user password for MySQL: "
+  read -s MYSQL_PASSWORD
+  echo
+
+  cd RubikVNdotOrg/db/
+  pv vn_db_export.sql | cat | mysql -u root --password=$MYSQL_PASSWORD
+
+  cd ../../
+
+  python3.6 manage.py makemigrations
+  python3.6 manage.py migrate
 }
 
 finish ()
@@ -71,6 +90,7 @@ usage ()
   echo "USAGE: ./install.sh [-u]"
   echo "    ./install.sh        For first time installation"
   echo "    ./install.sh -u     From second time installation, tell the script to update the database only"
+  echo "    ./install.sh -m     Make migrations whenever the database structure is changed, without downloading and running the WCA database export script."
 }
 
 # main script
@@ -82,10 +102,13 @@ then
   db_setup
   finish
 else
-  while getopts ":u" opt; do
+  while getopts ":um" opt; do
     case ${opt} in
       u )
         db_setup
+        ;;
+      m )
+        dj_migrate
         ;;
       \?)
         usage

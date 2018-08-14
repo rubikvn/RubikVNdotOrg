@@ -1,10 +1,12 @@
 from django.db import models
 
+from .country import Country
+
 class Competition(models.Model):
-    id = models.CharField(max_length=32, primary_key=True)
+    id = models.CharField(primary_key=True, max_length=32)
     name = models.CharField(max_length=50)
     cityname = models.CharField(db_column='cityName', max_length=50)
-    countryid = models.CharField(db_column='countryId', max_length=50)
+    countryid = models.ForeignKey(Country, models.CASCADE, db_column='countryId')
     information = models.TextField(blank=True, null=True)
     year = models.PositiveSmallIntegerField()
     month = models.PositiveSmallIntegerField()
@@ -21,6 +23,7 @@ class Competition(models.Model):
     cellname = models.CharField(db_column='cellName', max_length=45)
     latitude = models.IntegerField(blank=True, null=True)
     longitude = models.IntegerField(blank=True, null=True)
+
 
     class Meta:
         managed = False
@@ -43,7 +46,7 @@ class Championship(models.Model):
         return f"Championship name: {self.competition_id}"
 
 
-class EligibleCountryIso2SForChampionship(models.Model):
+class EligibleCountryIso2ForChampionship(models.Model):
     id = models.BigIntegerField(primary_key=True)
     championship_type = models.CharField(max_length=191)
     eligible_country_iso2 = models.CharField(max_length=191)

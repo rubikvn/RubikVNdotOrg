@@ -14,4 +14,7 @@ rbvn-env/
 
 # Specific files
 local_settings.py
+
+# Exceptions
 !requirements.txt
+!vn_db_export.sql

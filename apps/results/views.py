@@ -10,9 +10,9 @@ def ranking(request):
     category = request.GET.get("category", "single")
     results = []
     if category == "single":
-        results = Ranksingle.get_rank_single(eventid, limit)
+        results = RankSingle.get_rank_single(eventid, limit)
     elif category == "average":
-        results = Rankaverage.get_rank_average(eventid, limit)
+        results = RankAverage.get_rank_average(eventid, limit)
     for result in results:
         seconds = result.best / 100
         if seconds >= 60:

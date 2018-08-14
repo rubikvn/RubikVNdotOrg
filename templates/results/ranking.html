@@ -130,7 +130,7 @@ Ranking for {{ event_name }}
 			    <thead>
 			      <tr>
 			        <th>Rank</th>
-			        <th>WCA ID</th>
+			        <th>Name</th>
 			        <th>Result</th>
 			        <!-- <th>Random</th> -->
 			      </tr>
@@ -139,12 +139,12 @@ Ranking for {{ event_name }}
             {% for result in results %}
             <tr>
               <td>{{ forloop.counter }}</td>
-              <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid }}">{{ result.personid }}</a></td>
+              <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid.id }}">{{ result.personid.name }}</a></td>
               <td>{{ result.best }}</td>
               <!-- <td>{{ result }}</td> -->
             </tr>
             {% empty %}
-              No value available
+              <td>No value available</td>
             {% endfor %}
 			    </tbody>
 			  </table>

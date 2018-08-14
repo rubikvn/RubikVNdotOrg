@@ -1,7 +1,7 @@
 from django.db import models
 
-class Roundtype(models.Model):
-    id = models.CharField(max_length=1, primary_key=True)
+class RoundType(models.Model):
+    id = models.CharField(primary_key=True, max_length=1)
     rank = models.IntegerField()
     name = models.CharField(max_length=50)
     cellname = models.CharField(db_column='cellName', max_length=45)
@@ -15,7 +15,6 @@ class Roundtype(models.Model):
         return f"Round type: {self.cellname}"
 
 class Round(models.Model):
-    id = models.AutoField(primary_key=True)
     sorry_message = models.CharField(max_length=172)
 
     class Meta:

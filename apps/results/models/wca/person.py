@@ -1,10 +1,12 @@
 from django.db import models
 
+from .country import Country
+
 class Person(models.Model):
-    id = models.CharField(max_length=10, primary_key=True)
+    id = models.CharField(primary_key=True, max_length=10)
     subid = models.IntegerField()
     name = models.CharField(max_length=80, blank=True, null=True)
-    countryid = models.CharField(db_column='countryId', max_length=50)
+    countryid = models.ForeignKey(Country, models.CASCADE, db_column='countryId')
     gender = models.CharField(max_length=1, blank=True, null=True)
 
     class Meta:

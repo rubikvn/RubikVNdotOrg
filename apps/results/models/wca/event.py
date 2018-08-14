@@ -1,7 +1,7 @@
 from django.db import models
 
 class Event(models.Model):
-    id = models.CharField(max_length=6, primary_key=True)
+    id = models.CharField(primary_key=True, max_length=6)
     name = models.CharField(max_length=54)
     rank = models.IntegerField()
     format = models.CharField(max_length=10)

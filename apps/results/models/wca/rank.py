@@ -1,9 +1,11 @@
 from django.db import models
 
-class Rankaverage(models.Model):
-    id = models.AutoField(primary_key=True)
-    personid = models.CharField(db_column='personId', max_length=10)
-    eventid = models.CharField(db_column='eventId', max_length=6)
+from .person import Person
+from .event import Event
+
+class RankAverage(models.Model):
+    personid = models.ForeignKey(Person, models.CASCADE, db_column='personId')
+    eventid = models.ForeignKey(Event, models.CASCADE, db_column='eventId')
     best = models.IntegerField()
     worldrank = models.IntegerField(db_column='worldRank')
     continentrank = models.IntegerField(db_column='continentRank')
@@ -18,18 +20,20 @@ class Rankaverage(models.Model):
 
     @staticmethod
     def get_rank_average(eventid='333', limit='100'):
-        if limit == 'All':
-            limit = None
-        else:
-            limit = int(limit)
-        results = Rankaverage.objects.filter(eventid = eventid).order_by('best')[:limit]
-        return results
+        try:
+            if limit == 'All':
+                limit = None
+            else:
+                limit = int(limit)
+            results = RankAverage.objects.filter(eventid = eventid).order_by('best')[:limit]
+            return results
+        except ValueError:
+            return []
 
 
-class Ranksingle(models.Model):
-    id = models.AutoField(primary_key=True)
-    personid = models.CharField(db_column='personId', max_length=10)
-    eventid = models.CharField(db_column='eventId', max_length=6)
+class RankSingle(models.Model):
+    personid = models.ForeignKey(Person, models.CASCADE, db_column='personId')
+    eventid = models.ForeignKey(Event, models.CASCADE, db_column='eventId')
     best = models.IntegerField()
     worldrank = models.IntegerField(db_column='worldRank')
     continentrank = models.IntegerField(db_column='continentRank')
@@ -44,9 +48,12 @@ class Ranksingle(models.Model):
 
     @staticmethod
     def get_rank_single(eventid='333', limit='100'):
-        if limit == 'All':
-            limit = None
-        else:
-            limit = int(limit)
-        results = Ranksingle.objects.filter(eventid = eventid).order_by('best')[:limit]
-        return results
+        try:
+            if limit == 'All':
+                limit = None
+            else:
+                limit = int(limit)
+            results = RankSingle.objects.filter(eventid = eventid).order_by('best')[:limit]
+            return results
+        except ValueError:
+            return []
