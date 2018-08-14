@@ -139,7 +139,7 @@ Ranking for {{ event_name }}
             {% for result in results %}
             <tr>
               <td>{{ forloop.counter }}</td>
-              <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid.id }}">{{ result.personid.name }}</a></td>
+              <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid }}">{{ result.personid__name }}</a></td>
               <td>{{ result.best }}</td>
               <!-- <td>{{ result }}</td> -->
             </tr>

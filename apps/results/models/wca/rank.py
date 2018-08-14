@@ -25,7 +25,11 @@ class RankAverage(models.Model):
                 limit = None
             else:
                 limit = int(limit)
-            results = RankAverage.objects.filter(eventid = eventid).order_by('best')[:limit]
+            results = RankAverage.objects.values(
+                'personid', 'personid__name', 'best'
+            ).filter(
+                eventid = eventid
+            ).order_by('best')[:limit]
             return results
         except ValueError:
             return []
@@ -53,7 +57,11 @@ class RankSingle(models.Model):
                 limit = None
             else:
                 limit = int(limit)
-            results = RankSingle.objects.filter(eventid = eventid).order_by('best')[:limit]
+            results = RankSingle.objects.values(
+                'personid', 'personid__name', 'best'
+            ).filter(
+                eventid = eventid
+            ).order_by('best')[:limit]
             return results
         except ValueError:
             return []
