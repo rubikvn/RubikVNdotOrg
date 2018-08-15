@@ -22,6 +22,7 @@ Sooo, this part assumes that you have Git, Python and MySQL on your computer, an
 
 ```bash
 git clone https://gitlab.com/rubikvn/rubikvn.git
+git checkout dev
 ```
 
 You will be prompted to login using your Gitlab credentials, just enter your Gitlab username and password.

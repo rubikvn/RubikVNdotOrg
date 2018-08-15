@@ -16,10 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from apps.results.views import index
-
 urlpatterns = [
-    path('', index),
-    path('admin/', admin.site.urls),
-    path('results/', include('apps.results.urls')),
+    path('', include('apps.frontend_test.urls')),
+    # path('admin/', admin.site.urls),
+    # path('results/', include('apps.results.urls')),
 ]
