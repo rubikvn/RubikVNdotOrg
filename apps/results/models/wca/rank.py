@@ -28,7 +28,12 @@ class RankAverage(models.Model):
             else:
                 limit = int(limit)
             results = RankAverage.objects.values(
-                'personid', 'personid__name', 'best', 'countryrank'
+                'personid',
+                'personid__name',
+                'best',
+                'countryrank',
+                'competitionid',
+                'competitionid__name'
             ).filter(
                 eventid = eventid
             ).order_by('best')[:limit]
@@ -61,7 +66,12 @@ class RankSingle(models.Model):
             else:
                 limit = int(limit)
             results = RankSingle.objects.values(
-                'personid', 'personid__name', 'best', 'countryrank'
+                'personid',
+                'personid__name',
+                'best',
+                'countryrank',
+                'competitionid',
+                'competitionid__name'
             ).filter(
                 eventid = eventid
             ).order_by('best')[:limit]

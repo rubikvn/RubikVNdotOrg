@@ -103,7 +103,7 @@ ADD `id` int(6) PRIMARY KEY AUTO_INCREMENT;
 
 -- Scrambles
 CREATE TABLE IF NOT EXISTS Scrambles
-    LIKE wca.Scrambles; 
+    LIKE wca.Scrambles;
 
 ALTER TABLE Scrambles
 ADD PRIMARY KEY (`scrambleId`);

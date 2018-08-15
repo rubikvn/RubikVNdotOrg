@@ -132,7 +132,7 @@ Ranking for {{ event_name }}
 			        <th>Rank</th>
 			        <th>Name</th>
 			        <th>Result</th>
-			        <!-- <th>Random</th> -->
+			        <th>Competition</th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -141,10 +141,9 @@ Ranking for {{ event_name }}
               <td>{{ result.countryrank }}</td>
               <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid }}" target="_blank">{{ result.personid__name }}</a></td>
               <td>{{ result.best }}</td>
-              <!-- <td>{{ result }}</td> -->
+              <td><a href="https:/www.worldcubeassociation.org/competitions/{{ result.competitionid }}" target="_blank">{{ result.competitionid__name }}</a></td>
             </tr>
             {% empty %}
-              <td>No value available</td>
             {% endfor %}
 			    </tbody>
 			  </table>

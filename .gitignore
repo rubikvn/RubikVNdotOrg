@@ -9,6 +9,7 @@ rbvn-env/
 *.log
 *.pot
 *.pyc
+*.swp
 *.sql
 *.txt
 

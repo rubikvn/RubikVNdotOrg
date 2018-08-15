@@ -1,5 +1,15 @@
 from django.db import models
 
+FORMAT_TIME = [
+    '222', '333', '333bf', '333ft',
+    '333oh', '444', '444bf', '555',
+    '555bf', '666', '777', 'clock',
+    'magic', 'minx', 'mmagic', 'pyram',
+    'skewb', 'sq1'
+]
+FORMAT_MULTI = ['333mbf', '333mbo']
+FORMAT_NUMBER = ['333fm']
+
 class Event(models.Model):
     id = models.CharField(primary_key=True, max_length=6)
     name = models.CharField(max_length=54)
