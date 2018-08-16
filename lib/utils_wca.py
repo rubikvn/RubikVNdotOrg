@@ -13,8 +13,8 @@ class Formatter():
             # for official_events, action in [self.FORMAT_TIME, self.FORMAT_NUMBER, self.FORMAT_MULTI]:
             for official_events, action in self.actions:
                 if eventid in official_events:
-                    self.__turn_page = action
-                    return self.__turn_page(iterable, key_name, category)
+                    self.__format = action
+                    return self.__format(iterable, key_name, category)
         except Error:
             return None
 
