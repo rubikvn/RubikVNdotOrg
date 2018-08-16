@@ -10,7 +10,6 @@ class Formatter():
 
     def format_wca_result(self, iterable, key_name, eventid, category):
         try:
-            # for official_events, action in [self.FORMAT_TIME, self.FORMAT_NUMBER, self.FORMAT_MULTI]:
             for official_events, action in self.actions:
                 if eventid in official_events:
                     self.__format = action

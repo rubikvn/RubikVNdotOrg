@@ -13,6 +13,7 @@ def ranking(request):
     limit = request.GET.get("limit", "100")
     category = request.GET.get("category", "single")
     results = []
+    event_name = Event.get_event_name(eventid)
 
     if category == "single":
         results = RankSingle.get_rank_single(eventid, limit)
@@ -26,7 +27,7 @@ def ranking(request):
     results = f.format_wca_result(results, "best", eventid, category)
 
     context = {
-        "event_name": eventid,
+        "event_name": event_name,
         "limit": limit,
         "category": category,
         "results": results,

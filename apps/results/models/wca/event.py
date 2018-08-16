@@ -23,3 +23,11 @@ class Event(models.Model):
 
     def __str__(self):
         return f"Event name: {self.name}, format: {self.format}"
+
+    @staticmethod
+    def get_event_name(eventid):
+        try:
+            event =  Event.objects.get(pk=eventid)
+            return event.name
+        except Event.DoesNotExist:
+            return ""
