@@ -1,16 +1,10 @@
-{% extends "results/layout.html" %}
-
-{% block title %}
-{{ person.name }} | RubikVN
-{% endblock %}
-
-{% block body %}
-  <h1>Person: {{ person.name }}</h1>
-  <ul>
-    <li>WCA ID: {{ person.id }}</li>
-    <li>Name: {{ person.name }}</li>
-    <li>Gender: {{ person.gender }}</li>
-    <li>Country: {{ person.country }}</li>
-    <li>Birthdate: {{ person.dob }}</li>
-    <li>Email: {{ person.email }}</li>
-{% endblock %}
+{% extends "base_layout.html" %} {% block title %} {{ person.name }} | RubikVN {% endblock %} {% block body %}
+<h1>Person: {{ person.name }}</h1>
+<ul>
+  <li>WCA ID: {{ person.id }}</li>
+  <li>Name: {{ person.name }}</li>
+  <li>Gender: {{ person.gender }}</li>
+  <li>Country: {{ person.country }}</li>
+  <li>Birthdate: {{ person.dob }}</li>
+  <li>Email: {{ person.email }}</li>
+  {% endblock %}

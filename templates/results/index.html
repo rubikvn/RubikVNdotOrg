@@ -1,78 +1,73 @@
-{% extends "results/layout.html" %}
+{% extends "base_layout.html" %}
 {% load static %}
 {% block style %}
-    <link rel="stylesheet" href="{% static 'results/index.css' %}">
+<link rel="stylesheet" href="{% static 'results/index.css' %}">
 {% endblock %}
-{% block title %}
-RubikVN
-{% endblock %}
-
+{% block title %} Homepage {% endblock %}
 {% block body %}
-    <!-- End Navbar -->
-    <!-- Wrapper1 -->
-    <div class="wrapper1">
-        <div class="container">
-            <div class="row">
-                <div class="new-event text-center">
-                    <h1>Vietnam Cubing Organization</h1>
+<!-- Wrapper1 -->
+<div class="wrapper1">
+  <div class="container">
+    <div class="row">
+      <div class="new-event text-center">
+        <h1>Vietnam Cubing Organization</h1>
 
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                    <img src="{% static "results/rubik2.png"%}" alt="" class="img-responsive">
-                </div>
-                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">
-                    <h3 style="text-transform: uppercase; letter-spacing: 2.5px">WCA Hanoi Open 2018</h3>
-                    <a href="">Check the result here</a>
-                </div>
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                    <img src="{% static "results/rubik2.png"%}" alt="" class="img-responsive">
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <!-- End wrapper1 -->
-    <!-- Carousel - slide show -->
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-md-push-2">
-
-
-                <div id="carousel-id" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-id" data-slide-to="1" class=""></li>
-
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="{% static "results/wr.jpg"%}">
-                            <div class="container">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h1>World Record</h1>
-                                    <p><a class="btn btn-lg btn-primary" href="https://www.youtube.com/watch?v=NevGDFBfQGw		" role="button" target="_blank">Click here to view</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="{%static "results/wca.jpg"%}">
-                            <div class="container">
-                                <div class="carousel-caption">
-                                    <h1>Hanoi Open 2018</h1>
-                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn More</a></p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-                    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-                </div>
-            </div>
-        </div>
-    <!-- End carousel -->
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <img src="{% static " results/rubik2.png "%}" alt="" class="img-responsive">
+      </div>
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">
+        <h3 style="text-transform: uppercase; letter-spacing: 2.5px">WCA Hanoi Open 2018</h3>
+        <a href="">Check the result here</a>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <img src="{% static " results/rubik2.png "%}" alt="" class="img-responsive">
+      </div>
     </div>
-    <hr>
+  </div>
+</div>
+<!-- End wrapper1 -->
+<!-- Carousel - slide show -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-md-push-2">
 
-    {% endblock %}
+
+      <div id="carousel-id" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-id" data-slide-to="1" class=""></li>
+
+        </ol>
+        <div class="carousel-inner">
+          <div class="item active">
+            <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="{% static " results/wr.jpg "%}">
+            <div class="container">
+              <div class="carousel-caption d-none d-md-block">
+                <h1>World Record</h1>
+                <p><a class="btn btn-lg btn-primary" href="https://www.youtube.com/watch?v=NevGDFBfQGw		" role="button" target="_blank">Click here to view</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="{%static " results/wca.jpg "%}">
+            <div class="container">
+              <div class="carousel-caption">
+                <h1>Hanoi Open 2018</h1>
+                <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn More</a></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+      </div>
+    </div>
+  </div>
+  <!-- End carousel -->
+</div>
+<hr>
+{% endblock %}

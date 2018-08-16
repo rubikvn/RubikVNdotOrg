@@ -1,56 +1,52 @@
-{% extends "results/layout.html" %}
+{% extends "base_layout.html" %}
 {% load static %}
-
 {% block style %}
-    <link rel="stylesheet" href="{% static 'results/ranking.css' %}">
+<link rel="stylesheet" href="{% static 'results/ranking.css' %}">
 {% endblock %}
-
-{% block title %}
-Ranking for {{ event_name }}
-{% endblock %}
+{% block title %} Ranking {% endblock %}
 {% block script %}
-	<script>
-		$(document).ready(function(){
-			$(".filter-engine").click(function(){
-				$(".extra-filters").toggle('slow');
-			});
-		});
-	</script>
+<script>
+  $(document).ready(function() {
+    $(".filter-engine").click(function() {
+      $(".extra-filters").toggle('slow');
+    });
+  });
+</script>
 {% endblock %}
 
-{% block body %}      
-		<div class="main">
-			<div class="page-title">
-				<h1 class="text-center">
-					Ranking
+{% block body %}
+<div class="main">
+  <div class="page-title">
+    <h1 class="text-center">
+					Ranking for {{ event_name }}
 				</h1>
-			</div>
-			<div class="filter">
-				<div class="container">
-					<div class="row">
-						<form action="get" >
-							<div class="form-group row">
-								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-									<input type="text" class="form-control " placeholder="Competitor name">
-								</div>
-								<button class="btn btn-primary" type="submit">Find</button>
-								<a class="filter-engine btn btn-danger">More Filters</a>
+  </div>
+  <div class="filter">
+    <div class="container">
+      <div class="row">
+        <form action="get">
+          <div class="form-group row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <input type="text" class="form-control " placeholder="Competitor name">
+            </div>
+            <button class="btn btn-primary" type="submit">Find</button>
+            <a class="filter-engine btn btn-danger">More Filters</a>
 
-							</div>
-
-
-						</form>
+          </div>
 
 
+        </form>
 
-					</div>
-				</div>
-				<div class="container extra-filters">
-					<div class="row">
-						<form action="{{ request.get_full_path }}" method="get" class="form-inline">
-							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-								<div class="form-group">
-																<label for="eventId">
+
+
+      </div>
+    </div>
+    <div class="container extra-filters">
+      <div class="row">
+        <form action="{{ request.get_full_path }}" method="get" class="form-inline">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="eventId">
 										Event:
 
 										<select name="eventid" id="eventid" class="drop form-control">
@@ -60,11 +56,11 @@ Ranking for {{ event_name }}
 											<option value="555" >5x5x5</option>
 										</select>
 									</label>
-								</div>
-							</div>
-							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-								<div class="form-group">
-									<label for="limit">
+            </div>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="limit">
 										Limit:
 
 										<select name="limit" id="limit" class="drop form-control">
@@ -74,84 +70,84 @@ Ranking for {{ event_name }}
 											<option value="All">All</option>
 										</select>
 									</label>
-								</div>
-							</div>
-							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-								<div class="form-group">
-									<label for="">
+            </div>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="">
 
 										<input type="submit" class="form-control singleBtn" value="single" name="category">
 									</label>
-								</div>
-								<div class="form-group">
-									<label for="">
+            </div>
+            <div class="form-group">
+              <label for="">
 
 										<input type="submit" class="form-control avgBtn" value="average" name="category" >
 									</label>
-								</div>
-							</div>
+            </div>
+          </div>
 
 
-						</form>
+        </form>
 
-					</div>
-				</div>
+      </div>
+    </div>
 
-			</div>
-		<div class="ranking-table">
-			<div class="container">
+  </div>
+  <div class="ranking-table">
+    <div class="container">
 
-			  <table class="table table-striped">
-			    <thead>
-			      <tr>
-			        <th>Rank</th>
-			        <th>Name</th>
-			        <th>Result</th>
-			        <th>Competition</th>
-			      </tr>
-			    </thead>
-			    <tbody>
-            {% for result in results %}
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Result</th>
+            <th>Competition</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for result in results %}
             <tr>
               <td>{{ result.countryrank }}</td>
               <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid }}" target="_blank">{{ result.personid__name }}</a></td>
               <td>{{ result.best }}</td>
               <td><a href="https:/www.worldcubeassociation.org/competitions/{{ result.competitionid }}" target="_blank">{{ result.competitionid__name }}</a></td>
             </tr>
-            {% empty %}
-            {% endfor %}
-			    </tbody>
-			  </table>
-			</div>
-		</div>
-		<div class="text-center">
-				<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							  <li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous">
+          {% empty %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="text-center">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
 								  <span aria-hidden="true">&laquo;</span>
 								  <span class="sr-only">Previous</span>
 								</a>
-							  </li>
-							{% for num in results.paginator.page_range%}
-							 	{% if num == results.number %}
-								 	<li class="page-item  active"><a class="page-link" href="#">{{ num }}</a></li>
-								{% elif num > results.number|add:'-4' and num < results.number|add:'4' %}
-									<li class="page-item"><a class="page-link" href="?page={{num}}&eventid={{ event_name }}&limit={{ limit }}&category={{ category }}">{{ num }}</a></li>
-							  	{% endif %}
-							{% endfor %}
+        </li>
+        {% for num in results.paginator.page_range%}
+          {% if num == results.number %}
+          <li class="page-item  active"><a class="page-link" href="#">{{ num }}</a></li>
+          {% elif num > results.number|add:'-4' and num
+          < results.number|add: '4' %} <li class="page-item"><a class="page-link" href="?page={{num}}&eventid={{ event_name }}&limit={{ limit }}&category={{ category }}">{{ num }}</a></li>
+        {% endif %}
+        {% endfor %}
 
-							<li>
-								<a class="page-link" href="#" aria-label="Next">
+          <li>
+            <a class="page-link" href="#" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
 									<span class="sr-only">Next</span>
 								</a>
-							  </li>
-						</ul>
-				</nav>
+          </li>
+      </ul>
+    </nav>
 
-		</div>
+  </div>
 
 
-	</div>
+</div>
 {% endblock %}
