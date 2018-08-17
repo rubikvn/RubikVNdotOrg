@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 
 from .models import *
-from lib.utils_wca import Formatter
+from lib.utils_wca import ResultFormatter
 # from datetime import datetime
 
 def ranking(request):
@@ -12,8 +12,9 @@ def ranking(request):
     eventid = request.GET.get("eventid", "333")
     limit = request.GET.get("limit", "100")
     category = request.GET.get("category", "single")
-    results = []
+    page = request.GET.get('page')
     event_name = Event.get_event_name(eventid)
+    results = []
 
     if category == "single":
         results = RankSingle.get_rank_single(eventid, limit)
@@ -21,10 +22,10 @@ def ranking(request):
         results = RankAverage.get_rank_average(eventid, limit)
 
     paginator = Paginator(results, 25)
-    page = request.GET.get('page')
     results = paginator.get_page(page)
-    f = Formatter()
-    results = f.format_wca_result(results, "best", eventid, category)
+
+    f = ResultFormatter(results.object_list, "best", eventid, category)
+    results.object_list = f.format()
 
     context = {
         "event_name": event_name,

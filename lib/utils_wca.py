@@ -1,35 +1,42 @@
 from apps.results.models.wca.event import FORMAT_TIME, FORMAT_MULTI, FORMAT_NUMBER
 
-class Formatter():
-    def __init__(self):
+class ResultFormatter():
+    def __init__(self, iterable, key_name, eventid, category="single"):
+        self.iterable = iterable
+        self.key_name = key_name
+        self.eventid = eventid
+        self.category = category
         self.actions = [
             (FORMAT_TIME, self.__format_wca_time),
             (FORMAT_MULTI, self.__format_wca_multi),
             (FORMAT_NUMBER, self.__format_wca_number)
         ]
 
-    def format_wca_result(self, iterable, key_name, eventid, category):
+    def __format(self):
+        pass
+
+    def format(self):
         try:
             for official_events, action in self.actions:
-                if eventid in official_events:
+                if self.eventid in official_events:
                     self.__format = action
-                    return self.__format(iterable, key_name, category)
+                    return self.__format()
         except Error:
             return None
 
-    def __format_wca_time(self, iterable, key_name, category=None):
-        for time in iterable:
-            seconds = time[key_name] / 100
+    def __format_wca_time(self):
+        for time in self.iterable:
+            seconds = time[self.key_name] / 100
             if seconds >= 60:
-                time[key_name] = f"{int(seconds/60):02d}:{seconds%60:05.2f}"
+                time[self.key_name] = f"{int(seconds/60):02d}:{seconds%60:05.2f}"
             else:
-                time[key_name] = f"{seconds:.2f}"
-        return iterable
+                time[self.key_name] = f"{seconds:.2f}"
+        return self.iterable
 
-    def __format_wca_multi(self, iterable, key_name, category=None):
-        for time in iterable:
+    def __format_wca_multi(self):
+        for time in self.iterable:
             # Decoding WCA notations
-            res = time[key_name]
+            res = time[self.key_name]
             DD = res // 10000000
             TTTTT = (res // 100) % 100000
             MM = res % 100
@@ -40,15 +47,15 @@ class Formatter():
             attempted = solved + MM
 
             if seconds == 3600:
-                time[key_name] = f"{solved}/{attempted} 1:00:00"
+                time[self.key_name] = f"{solved}/{attempted} 1:00:00"
             else:
-                time[key_name] = f"{solved}/{attempted} {int(seconds/60):02d}:{seconds%60:02d}"
-        return iterable
+                time[self.key_name] = f"{solved}/{attempted} {int(seconds/60):02d}:{seconds%60:02d}"
+        return self.iterable
 
-    def __format_wca_number(self, iterable, key_name, category="single"):
-        if category == "single":
-            return iterable
+    def __format_wca_number(self):
+        if self.category == "single":
+            return self.iterable
         else:
-            for num in iterable:
-                num[key_name] = f"{num[key_name]/100:05.2f}"
-            return iterable
+            for num in self.iterable:
+                num[self.key_name] = f"{num[self.key_name]/100:05.2f}"
+            return self.iterable
