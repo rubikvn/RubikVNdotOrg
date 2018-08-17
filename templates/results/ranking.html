@@ -10,6 +10,24 @@
     $(".filter-engine").click(function() {
       $(".extra-filters").toggle('slow');
     });
+    var updateFilter = function(){
+      console.log("{{eventid}}");
+      $("#{{ eventid }}").attr("selected", "selected")
+      $("select .event").each(function(index, value){
+        if (value.value != "{{ eventid }}"){
+          value.removeAttribute("selected");
+        }
+        //console.log(value.value);
+      });
+      
+      $("#{{limit}}").attr("selected", "selected");
+      $("#limit option").each(function(index, value){
+        if(value.value != "{{ limit }}"){
+          value.removeAttribute("selected");
+        }
+      });
+    };
+    updateFilter();
   });
 </script>
 {% endblock %}
@@ -21,79 +39,81 @@
 					Ranking for {{ event_name }}
 				</h1>
   </div>
-  <div class="filter">
-    <div class="container">
-      <div class="row">
-        <form action="{{ request.get_full_path }}" method="get">
-          <div class="form-group row">
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-              <input type="text" name="q" class="form-control" placeholder="Use search">
+  <form action="{{ request.get_full_path }}" method="get">
+    <div class="filter">
+      <div class="container">
+        <div class="row">
+          
+            <div class="form-group row">
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <input type="text" name="q" class="form-control" placeholder="Use search" value="{{ pattern }}">
+              </div>
+              <button class="btn btn-primary" type="submit">Find</button>
+              <a class="filter-engine btn btn-danger">More Filters</a>
+
             </div>
-            <button class="btn btn-primary" type="submit">Find</button>
-            <a class="filter-engine btn btn-danger">More Filters</a>
-
-          </div>
 
 
-        </form>
+          
 
 
 
+        </div>
       </div>
-    </div>
-    <div class="container extra-filters">
-      <div class="row">
-        <form action="{{ request.get_full_path }}" method="get" class="form-inline">
-          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            <div class="form-group">
-              <label for="eventId">
-										Event:
+      <div class="container extra-filters">
+        <div class="row">
+          <div class="form-inline">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <div class="form-group">
+                <label for="eventId">
+                      Event:
 
-										<select name="eventid" id="eventid" class="drop form-control">
-											<option value="333" selected="selected">3x3x3</option>
-											<option value="222" >2x2x2</option>
-											<option value="444" >4x4x4</option>
-											<option value="555" >5x5x5</option>
-										</select>
-									</label>
+                      <select name="eventid" id="eventid" class="drop form-control">
+                        <option class="event" id="222" value="222" >2x2x2</option>
+                        <option class="event" id="333" value="333" selected="selected">3x3x3</option>
+                        <option class="event" id="444" value="444" >4x4x4</option>
+                        <option class="event" id="555" value="555" >5x5x5</option>
+                      </select>
+                    </label>
+              </div>
             </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div class="form-group">
+                <label for="limit">
+                      Limit:
+
+                      <select name="limit" id="limit" class="drop form-control">
+                        <option id="100"value="100" selected="selected">100 Persons</option>
+                        <option id="500"value="500">500 Persons</option>
+                        <option id="1000"value="1000">1000 Persons</option>
+                        <option id="All" value="All">All</option>
+                      </select>
+                    </label>
+              </div>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <div class="form-group">
+                <label for="">
+
+                      <input type="submit" class="form-control singleBtn" value="single" name="category">
+                    </label>
+              </div>
+              <div class="form-group">
+                <label for="">
+
+                      <input type="submit" class="form-control avgBtn" value="average" name="category" >
+                    </label>
+              </div>
+            </div>
+
+
           </div>
-          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <div class="form-group">
-              <label for="limit">
-										Limit:
 
-										<select name="limit" id="limit" class="drop form-control">
-											<option value="100" selected="selected">100 Persons</option>
-											<option value="500">500 Persons</option>
-											<option value="1000">1000 Persons</option>
-											<option value="All">All</option>
-										</select>
-									</label>
-            </div>
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            <div class="form-group">
-              <label for="">
-
-										<input type="submit" class="form-control singleBtn" value="single" name="category">
-									</label>
-            </div>
-            <div class="form-group">
-              <label for="">
-
-										<input type="submit" class="form-control avgBtn" value="average" name="category" >
-									</label>
-            </div>
-          </div>
-
-
-        </form>
-
+        </div>
       </div>
-    </div>
 
-  </div>
+    </div>
+  </form>
   <div class="ranking-table">
     <div class="container">
 
