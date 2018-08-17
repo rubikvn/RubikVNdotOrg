@@ -24,10 +24,10 @@
   <div class="filter">
     <div class="container">
       <div class="row">
-        <form action="get">
+        <form action="{{ request.get_full_path }}" method="get">
           <div class="form-group row">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-              <input type="text" class="form-control " placeholder="Competitor name">
+              <input type="text" name="q" class="form-control" placeholder="Use search">
             </div>
             <button class="btn btn-primary" type="submit">Find</button>
             <a class="filter-engine btn btn-danger">More Filters</a>
