@@ -30,9 +30,12 @@ def ranking(request):
 
     context = {
         "event_name": event_name,
+        "eventid":eventid,
         "limit": limit,
         "category": category,
+        "pattern": pattern,
         "results": results,
+
     }
     # r = render(request, "results/ranking.html", context)
     # end = datetime.now()
