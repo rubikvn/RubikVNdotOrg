@@ -12,14 +12,15 @@ def ranking(request):
     eventid = request.GET.get("eventid", "333")
     limit = request.GET.get("limit", "100")
     category = request.GET.get("category", "single")
+    pattern = request.GET.get("q", "")
     page = request.GET.get('page')
     event_name = Event.get_event_name(eventid)
     results = []
 
     if category == "single":
-        results = RankSingle.get_rank_single(eventid, limit)
+        results = RankSingle.get_rank_single(eventid, limit, pattern)
     elif category == "average":
-        results = RankAverage.get_rank_average(eventid, limit)
+        results = RankAverage.get_rank_average(eventid, limit, pattern)
 
     paginator = Paginator(results, 25)
     results = paginator.get_page(page)

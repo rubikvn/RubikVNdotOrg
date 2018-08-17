@@ -21,7 +21,7 @@ class RankAverage(models.Model):
         return f"WCA ID: {self.personid}, event: {self.eventid} (average), result:{self.best} (WR{self.worldrank}, CR{self.continentrank}, NR{self.countryrank})"
 
     @staticmethod
-    def get_rank_average(eventid='333', limit='100'):
+    def get_rank_average(eventid='333', limit='100', pattern=''):
         try:
             if limit == 'All':
                 limit = None
@@ -35,7 +35,8 @@ class RankAverage(models.Model):
                 'competitionid',
                 'competitionid__name'
             ).filter(
-                eventid = eventid
+                eventid = eventid,
+                personid__name__icontains = pattern
             ).order_by('best')[:limit]
             return results
         except ValueError:
@@ -59,7 +60,7 @@ class RankSingle(models.Model):
         return f"WCA ID: {self.personid}, event: {self.eventid} (single), result:{self.best} (WR{self.worldrank}, CR{self.continentrank}, NR{self.countryrank})"
 
     @staticmethod
-    def get_rank_single(eventid='333', limit='100'):
+    def get_rank_single(eventid='333', limit='100', pattern=''):
         try:
             if limit == 'All':
                 limit = None
@@ -73,7 +74,8 @@ class RankSingle(models.Model):
                 'competitionid',
                 'competitionid__name'
             ).filter(
-                eventid = eventid
+                eventid = eventid,
+                personid__name__icontains = pattern
             ).order_by('best')[:limit]
             return results
         except ValueError:

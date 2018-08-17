@@ -16,6 +16,8 @@ class ResultFormatter():
         pass
 
     def format(self):
+        if not self.iterable:
+            return []
         try:
             for official_events, action in self.actions:
                 if self.eventid in official_events:
