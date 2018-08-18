@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-# Create url scheme
+app_name = "results"
 urlpatterns = [
     path("", views.index, name="index"),
     path("ranking/", views.ranking, name="ranking"),
