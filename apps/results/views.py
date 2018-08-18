@@ -32,7 +32,7 @@ def ranking(request):
         "eventid": eventid,
         "limit": limit,
         "category": category,
-        "pattern": pattern,
+        "query": query,
         "results": results,
 
     }

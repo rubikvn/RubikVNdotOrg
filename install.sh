@@ -19,14 +19,14 @@ db_setup ()
 {
   source rbvn-env/bin/activate
 
-  echo -n "Your root user password for MySQL: "
+  echo -n "Your rubikvn01 user password for MySQL: "
   read -s MYSQL_PASSWORD
   echo
 
   # Create mysql database named wca
   echo "Importing the database export..."
-  echo "DROP DATABASE IF EXISTS wca; DROP DATABASE IF EXISTS rubikvn;" | mysql -u root --password=$MYSQL_PASSWORD
-  echo "CREATE DATABASE wca; CREATE DATABASE rubikvn;" | mysql -u root --password=$MYSQL_PASSWORD
+  echo "DROP DATABASE IF EXISTS wca; DROP DATABASE IF EXISTS rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
+  echo "CREATE DATABASE wca; CREATE DATABASE rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
 
   # Create the database schema
   echo "Making migrations for Django project"
@@ -47,11 +47,11 @@ db_setup ()
   rm README.txt
   rm WCA_export.sql.zip
 
-  pv WCA_export.sql | cat | mysql -u root --password=$MYSQL_PASSWORD wca
+  pv WCA_export.sql | cat | mysql -u rubikvn01 --password=$MYSQL_PASSWORD wca
 
   # Extract from the database with our needed records
   echo "Reading from database wca and creating new database rubikvn..."
-  pv vn_db_export.sql | cat | mysql -u root --password=$MYSQL_PASSWORD
+  pv vn_db_export.sql | cat | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
 
   echo "Database updated on `date`" >> database_update.log
 
@@ -65,12 +65,12 @@ dj_migrate ()
 {
   source rbvn-env/bin/activate
 
-  echo -n "Your root user password for MySQL: "
+  echo -n "Your rubikvn01 user password for MySQL: "
   read -s MYSQL_PASSWORD
   echo
 
   cd RubikVNdotOrg/db/
-  pv vn_db_export.sql | cat | mysql -u root --password=$MYSQL_PASSWORD
+  pv vn_db_export.sql | cat | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
 
   cd ../../
 
