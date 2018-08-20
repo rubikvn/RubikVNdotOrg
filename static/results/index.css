@@ -1,4 +1,5 @@
 *{}
+
 /* Css for index page */
 body{
 	font-family: 'Lato', sans-serif;
@@ -20,4 +21,7 @@ img.img-responsive {
     background: inherit;
     /* border-radius: 125px; */
 }
-
+.carousel-inner>.item>a>img, .carousel-inner>.item>img {
+        line-height: 1;
+        filter: brightness(30%);
+}
