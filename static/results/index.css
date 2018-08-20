@@ -22,6 +22,6 @@ img.img-responsive {
     /* border-radius: 125px; */
 }
 .carousel-inner>.item>a>img, .carousel-inner>.item>img {
-        line-height: 1;
-        filter: brightness(30%);
+    line-height: 1;
+    filter: brightness(60%);
 }
