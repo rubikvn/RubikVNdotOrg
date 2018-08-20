@@ -11,16 +11,19 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from lib.config.configs import ServerConfig
+
+# Import secret keys for production server
+server_configs = ServerConfig()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '52*$f7q8&g8ca=@+0wid67f16uj@rbkiopz&127=o#!_$+auwv'
+SECRET_KEY = server_configs.key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'rubikvn',
-        'USER': 'root',
-        'PASSWORD': 'admin',
+        'USER': server_configs.db_uname,
+        'PASSWORD': server_configs.db_password,
         'HOST': 'localhost',
         'PORT': '3306'
     }
@@ -128,4 +131,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = ('static',)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
