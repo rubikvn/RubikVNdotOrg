@@ -2,6 +2,12 @@
 
 CONFIG_PATH=./RubikVNdotOrg/config/rubikvn.cnf
 
+echo -n "Your username for MySQL: "
+read MYSQL_USERNAME
+echo -n "Your user password for MySQL: "
+read -s MYSQL_PASSWORD
+echo
+
 # Install & set up virtualenv and project dependencies
 first_time_install ()
 {
@@ -20,23 +26,17 @@ initialize ()
   echo 'key = 352*$f7q8&g8ca=@+0wid67f16uj@rbkiopz&127=o#!_$+auwv' >> $CONFIG_PATH
   echo >> $CONFIG_PATH
   echo "[Database]" >> $CONFIG_PATH
-  echo "mysql_username = rubikvn01" >> $CONFIG_PATH
-  echo "mysql_password = rubikvietnam.org" >> $CONFIG_PATH
+  echo "mysql_username = $MYSQL_USERNAME" >> $CONFIG_PATH
+  echo "mysql_password = $MYSQL_PASSWORD" >> $CONFIG_PATH
 }
 
 db_setup ()
 {
   source rbvn-env/bin/activate
 
-  echo -n "Your rubikvn01 user password for MySQL: "
-  read -s MYSQL_PASSWORD
-  echo
-
   # Create mysql database named wca
   echo "Importing the database export..."
-  #echo "DROP DATABASE IF EXISTS wca; DROP DATABASE IF EXISTS rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
-  #echo "CREATE DATABASE wca; CREATE DATABASE rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
-  echo "CREATE DATABASE IF NOT EXISTS wca; CREATE DATABASE IF NOT EXISTS rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
+  echo "CREATE DATABASE IF NOT EXISTS wca; CREATE DATABASE IF NOT EXISTS rubikvn;" | mysql -u $MYSQL_USERNAME --password=$MYSQL_PASSWORD
 
   # Create the database schema
   echo "Making migrations for Django project"
@@ -57,11 +57,11 @@ db_setup ()
   rm README.txt
   rm WCA_export.sql.zip
 
-  pv WCA_export.sql | cat | mysql -u rubikvn01 --password=$MYSQL_PASSWORD wca
+  pv WCA_export.sql | cat | mysql -u $MYSQL_USERNAME --password=$MYSQL_PASSWORD wca
 
   # Extract from the database with our needed records
   echo "Reading from database wca and creating new database rubikvn..."
-  pv vn_db_export.sql | cat | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
+  pv vn_db_export.sql | cat | mysql -u $MYSQL_USERNAME --password=$MYSQL_PASSWORD
 
   echo "Database updated on `date`" >> database_update.log
 
@@ -75,12 +75,12 @@ dj_migrate ()
 {
   source rbvn-env/bin/activate
 
-  echo -n "Your rubikvn01 user password for MySQL: "
+  echo -n "Your $MYSQL_USERNAME user password for MySQL: "
   read -s MYSQL_PASSWORD
   echo
 
   cd RubikVNdotOrg/db/
-  pv vn_db_export.sql | cat | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
+  pv vn_db_export.sql | cat | mysql -u $MYSQL_USERNAME --password=$MYSQL_PASSWORD
 
   cd ../../
 
