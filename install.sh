@@ -25,8 +25,9 @@ db_setup ()
 
   # Create mysql database named wca
   echo "Importing the database export..."
-  echo "DROP DATABASE IF EXISTS wca; DROP DATABASE IF EXISTS rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
-  echo "CREATE DATABASE wca; CREATE DATABASE rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
+  #echo "DROP DATABASE IF EXISTS wca; DROP DATABASE IF EXISTS rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
+  #echo "CREATE DATABASE wca; CREATE DATABASE rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
+  echo "CREATE DATABASE IF NOT EXISTS wca; CREATE DATABASE IF NOT EXISTS rubikvn;" | mysql -u rubikvn01 --password=$MYSQL_PASSWORD
 
   # Create the database schema
   echo "Making migrations for Django project"
