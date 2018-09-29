@@ -27,11 +27,7 @@ Those 3 things are essential for running the website, so make sure you have all 
 
 1. Clone the repository:
 ```bash
-git clone https://gitlab.com/rubikvn/rubikvn.git
-```
-OR use SSH
-```bash
-git clone git@gitlab.com:rubikvn/rubikvn.git
+git clone https://github.com/RubikVN/RubikVNdotOrg.git
 ```
 
 2. Run installation script to have the database set up and project requirements downloaded for you
