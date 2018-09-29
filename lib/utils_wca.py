@@ -7,12 +7,12 @@ class ResultFormatter():
         self.eventid = eventid
         self.category = category
         self.actions = [
-            (FORMAT_TIME, self.__format_wca_time),
-            (FORMAT_MULTI, self.__format_wca_multi),
-            (FORMAT_NUMBER, self.__format_wca_number)
+            (FORMAT_TIME, self._format_wca_time),
+            (FORMAT_MULTI, self._format_wca_multi),
+            (FORMAT_NUMBER, self._format_wca_number)
         ]
 
-    def __format(self):
+    def _format(self):
         pass
 
     def format(self):
@@ -21,12 +21,12 @@ class ResultFormatter():
         try:
             for official_events, action in self.actions:
                 if self.eventid in official_events:
-                    self.__format = action
-                    return self.__format()
+                    self._format = action
+                    return self._format()
         except Error:
             return None
 
-    def __format_wca_time(self):
+    def _format_wca_time(self):
         for time in self.iterable:
             seconds = time[self.key_name] / 100
             if seconds >= 60:
@@ -35,7 +35,7 @@ class ResultFormatter():
                 time[self.key_name] = f"{seconds:.2f}"
         return self.iterable
 
-    def __format_wca_multi(self):
+    def _format_wca_multi(self):
         for time in self.iterable:
             # Decoding WCA notations
             res = time[self.key_name]
@@ -54,7 +54,7 @@ class ResultFormatter():
                 time[self.key_name] = f"{solved}/{attempted} {int(seconds/60):02d}:{seconds%60:02d}"
         return self.iterable
 
-    def __format_wca_number(self):
+    def _format_wca_number(self):
         if self.category == "single":
             return self.iterable
         else:

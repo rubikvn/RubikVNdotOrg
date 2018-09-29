@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from lib.config.configs import ServerConfig
+from RubikVNdotOrg.config.configs import ServerConfig
 
 # Import secret keys for production server
 server_configs = ServerConfig()
@@ -28,7 +28,7 @@ SECRET_KEY = server_configs.key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['178.128.49.215', 'rubikvietnam.org', 'www.rubikvietnam.org']
+ALLOWED_HOSTS = ['178.128.49.215', 'rubikvietnam.org', 'www.rubikvietnam.org', 'localhost']
 
 
 # Application definition
@@ -128,10 +128,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-#STATIC_ROOT = '/home/trungams/rubikvn/static/'
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static/"),
+    os.path.join(BASE_DIR, "static"),
 ]

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CONFIG_PATH=./RubikVNdotOrg/config/rubikvn.cnf
+
 # Install & set up virtualenv and project dependencies
 first_time_install ()
 {
@@ -13,6 +15,13 @@ initialize ()
   virtualenv rbvn-env/ -p python3.6
   source rbvn-env/bin/activate
   pip install -r requirements.txt
+
+  echo "[Secret]" > $CONFIG_PATH
+  echo 'key = 352*$f7q8&g8ca=@+0wid67f16uj@rbkiopz&127=o#!_$+auwv' >> $CONFIG_PATH
+  echo >> $CONFIG_PATH
+  echo "[Database]" >> $CONFIG_PATH
+  echo "mysql_username = rubikvn01" >> $CONFIG_PATH
+  echo "mysql_password = rubikvietnam.org" >> $CONFIG_PATH
 }
 
 db_setup ()
