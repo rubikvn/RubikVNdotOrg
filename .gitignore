@@ -4,6 +4,7 @@ backups/
 rbvn-env/
 .vscode/
 .archive/
+admin/
 
 # File formats
 *.log
