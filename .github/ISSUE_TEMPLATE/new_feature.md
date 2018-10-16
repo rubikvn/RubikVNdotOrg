@@ -1,5 +1,7 @@
 ---
 name: Improvement request
+about: We devs love to work!
+
 ---
 
 <!--- Request for new features/enhancement of the website -->
