@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from RubikVNdotOrg.config.configs import ServerConfig
+from RubikVNdotOrg.lib.config.configs import ServerConfig
 
 # Import secret keys for production server
 server_configs = ServerConfig()
