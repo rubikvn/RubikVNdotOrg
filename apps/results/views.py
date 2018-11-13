@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 
 from .models import *
-from lib.utils_wca import ResultFormatter
+from RubikVNdotOrg.lib.formatter import ResultFormatter
 
 
 def ranking(request):
