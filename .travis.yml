@@ -10,7 +10,9 @@ env:
 install:
     - pip install -r requirements.txt
 before_script:
+    - cat "$TRAVIS_BUILD_DIR/RubikVNdotOrg/db/my.cnf" | sudo tee -a /etc/mysql/my.cnf
+    - sudo service mysql restart
     - mysql -e 'CREATE DATABASE IF NOT EXISTS test_rubikvn;'
-    - mysql -u root --default-character-set=utf8mb4 test_rubikvn < RubikVNdotOrg/db/rubikvn_schema.sql
+    - mysql -u root --default-character-set=utf8mb4 test_rubikvn < $TRAVIS_BUILD_DIR/RubikVNdotOrg/db/rubikvn_schema.sql
 script:
     python manage.py test --keepdb
