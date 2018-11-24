@@ -1,6 +1,7 @@
 # Directories
 __pycache__/
 backups/
+static-collected/
 rbvn-env/
 .vscode/
 .archive/
