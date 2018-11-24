@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['178.128.49.215', 'rubikvietnam.org', 'www.rubikvietnam.org', '
 
 INSTALLED_APPS = [
     'apps.results.apps.ResultsConfig',
-#   'apps.frontend_test.apps.FrontendTestConfig',
+    'apps.events.apps.EventsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -88,13 +88,15 @@ DATABASES = {
         'USER': server_configs.db_uname,
         'PASSWORD': server_configs.db_password,
         'HOST': 'localhost',
-        'PORT': '3306'
+        'PORT': '3306',
     }
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'events.Cuber'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -109,6 +111,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'RubikVNdotOrg.lib.oauth_backend.OAuthBackend',
+    'django.contrib.auth.backends.ModelBackend'
 ]
 
 
