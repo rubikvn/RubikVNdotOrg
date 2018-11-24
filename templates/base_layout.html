@@ -37,6 +37,11 @@
           <li><a href="#">Events</a></li>
           <li><a href="#">Beginners</a></li>
           <li><a href="#">Information</a></li>
+          {% if user.is_authenticated %}
+              <li><a href="/logout">Logout</a></li>
+          {% else %}
+              <li><a href="/login">Login</a></li>
+          {% endif %}
         </ul>
       </div>
       <!-- /.navbar-collapse -->
