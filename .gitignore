@@ -22,3 +22,5 @@ local_settings.py
 # Exceptions
 !requirements.txt
 !vn_db_export.sql
+!wca_schema.sql
+!rubikvn_schema.sql

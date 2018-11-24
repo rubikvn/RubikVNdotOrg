@@ -1,0 +1,15 @@
+[Secret]
+key = 352*$f7q8&g8ca=@+0wid67f16uj@rbkiopz&127=o#!_$+auwv
+
+[Database]
+mysql_username = root
+mysql_password =
+
+[OAuth2]
+client_id =
+client_secret =
+callback_uri = http://localhost/login/oauth_handler
+default_scope = public
+base_url_authorize = https://www.worldcubeassociation.org/oauth/authorize?
+base_url_fetch_token = https://www.worldcubeassociation.org/oauth/token
+base_url_api = https://www.worldcubeassociation.org/api/v0/

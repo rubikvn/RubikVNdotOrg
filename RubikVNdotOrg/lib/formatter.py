@@ -1,4 +1,4 @@
-from apps.results.models.wca.event import FORMAT_TIME, FORMAT_MULTI, FORMAT_NUMBER
+from apps.results.models import FORMAT_TIME, FORMAT_MULTI, FORMAT_NUMBER
 
 class ResultFormatter():
     def __init__(self, iterable, key_name, eventid, category="single"):

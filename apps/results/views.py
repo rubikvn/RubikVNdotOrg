@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.core.paginator import Paginator
 
 from .models import *
-from lib.utils_wca import ResultFormatter
+from RubikVNdotOrg.lib.formatter import ResultFormatter
 
 
 def ranking(request):
@@ -39,4 +39,4 @@ def ranking(request):
     return render(request, "results/ranking.html", context)
 
 def index(request):
-    return render(request, "results/index.html")
+    return redirect('ranking')

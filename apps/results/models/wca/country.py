@@ -12,5 +12,9 @@ class Country(models.Model):
         managed = False
         db_table = 'Countries'
 
+    @staticmethod
+    def get_country_from_iso2(iso2):
+        return Country.objects.get(iso2=iso2)
+
     def __str__(self):
         return f"Country name: {self.name}, Iso2: {self.iso2}"

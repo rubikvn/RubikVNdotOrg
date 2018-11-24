@@ -1,7 +1,7 @@
 from .wca.competition import Competition, Championship, EligibleCountryIso2ForChampionship
 from .wca.continent import Continent
 from .wca.country import Country
-from .wca.event import Event
+from .wca.event import Event, FORMAT_TIME, FORMAT_MULTI, FORMAT_NUMBER
 from .wca.format import Format
 from .wca.person import Person
 from .wca.rank import RankAverage, RankSingle

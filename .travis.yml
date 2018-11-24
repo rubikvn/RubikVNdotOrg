@@ -1,0 +1,18 @@
+dist: trusty
+sudo: true
+language: python
+python:
+    - "3.6"
+services:
+    - mysql
+env:
+    - DJANGO=2.1.2 DB=mysql RUNNING_TRAVIS=true
+install:
+    - pip install -r requirements.txt
+before_script:
+    - cat "$TRAVIS_BUILD_DIR/RubikVNdotOrg/db/my.cnf" | sudo tee -a /etc/mysql/my.cnf
+    - sudo service mysql restart
+    - mysql -e 'CREATE DATABASE IF NOT EXISTS test_rubikvn;'
+    - mysql -u root --default-character-set=utf8mb4 test_rubikvn < $TRAVIS_BUILD_DIR/RubikVNdotOrg/db/rubikvn_schema.sql
+script:
+    python manage.py test --keepdb

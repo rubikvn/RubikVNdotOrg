@@ -38,11 +38,6 @@ db_setup ()
   echo "Importing the database export..."
   echo "CREATE DATABASE IF NOT EXISTS wca; CREATE DATABASE IF NOT EXISTS rubikvn;" | mysql -u $MYSQL_USERNAME --password=$MYSQL_PASSWORD
 
-  # Create the database schema
-  echo "Making migrations for Django project"
-  python3.6 manage.py makemigrations
-  python3.6 manage.py migrate
-
   # Download & import WCA database
   echo "Downloading WCA database export..."
   cd RubikVNdotOrg/db/
@@ -66,6 +61,11 @@ db_setup ()
   echo "Database updated on `date`" >> database_update.log
 
   cd ../../
+
+  # Create the database schema
+  echo "Making migrations for Django project"
+  python3.6 manage.py makemigrations
+  python3.6 manage.py migrate
 
   echo "-------------------------------"
   echo "Done setting up MySQL database."
