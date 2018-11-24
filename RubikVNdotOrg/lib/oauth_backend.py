@@ -2,7 +2,7 @@ import requests
 
 from RubikVNdotOrg.settings import server_configs
 from apps.events.models import Cuber
-from apps.results.models.wca.country import Country
+from apps.results.models import Country
 
 # print(server_configs.oauth_client_id)
 class OAuthBackend():

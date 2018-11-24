@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
 
-from apps.results.models.wca.country import Country
+from apps.results.models import Country
 
 # Create your models here.
 class CuberManager(models.Manager):
