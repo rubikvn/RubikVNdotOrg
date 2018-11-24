@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.core.paginator import Paginator
@@ -39,4 +39,4 @@ def ranking(request):
     return render(request, "results/ranking.html", context)
 
 def index(request):
-    return render(request, "results/index.html")
+    return redirect('ranking')
