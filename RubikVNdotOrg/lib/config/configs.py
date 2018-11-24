@@ -1,9 +1,13 @@
+import os
 import configparser
 
 class ServerConfig():
     def __init__(self):
         config = configparser.ConfigParser()
-        config.read('./RubikVNdotOrg/lib/config/rubikvn.cnf')
+        if os.getenv("RUNNING_TRAVIS") == "true":
+            config.read('./RubikVNdotOrg/lib/config/rubikvn-default.cnf')
+        else:
+            config.read('./RubikVNdotOrg/lib/config/rubikvn.cnf')
 
         # Django secret key
         self.key = config['Secret']['key']
