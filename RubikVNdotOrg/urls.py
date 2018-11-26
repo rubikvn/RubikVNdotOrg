@@ -20,11 +20,11 @@ from django.views.generic import TemplateView
 import apps.events.views as eviews
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="index.html")),
-    path("admin/", admin.site.urls),
-    path("login/", eviews.oauth_login, name="login"),
-    path("login/oauth_handler", eviews.oauth_handler, name="oauth_handler"),
-    path("logout/", eviews.oauth_logout, name="logout"),
-    path("results/", include("apps.results.urls")),
-    path("events/", include("apps.events.urls")),
+    path("", TemplateView.as_view(template_name="unv.html")),
+    # path("admin/", admin.site.urls),
+    # path("login/", eviews.oauth_login, name="login"),
+    # path("login/oauth_handler", eviews.oauth_handler, name="oauth_handler"),
+    # path("logout/", eviews.oauth_logout, name="logout"),
+    # path("results/", include("apps.results.urls")),
+    # path("events/", include("apps.events.urls")),
 ]
