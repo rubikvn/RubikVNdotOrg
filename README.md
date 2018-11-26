@@ -4,7 +4,7 @@ Source code for https://rubikvietnam.org/
 
 ### Getting involved
 
-Shoot me an email at <vttrung12@gmail.com> and tell me which part of the project you'd be interested in. Or simply clone this repo, make some changes, create a pull request. If approved, you are automatically part of the team.
+Shoot me an email at <vttrung12@gmail.com> and tell me which part of the project you'd be interested in. Or simply clone this repo, make some changes, create a pull request. If approved, you will be invited to the team.
 
 For a temporary alternative to Project Wiki, check `docs/developer_guide.md`
 
@@ -12,6 +12,8 @@ For a temporary alternative to Project Wiki, check `docs/developer_guide.md`
 
 * Website is up and running!
 * You can now view rankings of Vietnamese speedcubers for all categories
+* Users will soon be able to log in via OAuth
+* I've just set up TravisCI for this github repository!
 * We need tremendous help to improve our front-end
 
 ### Cloning the repo & running the server (first time)
@@ -19,7 +21,7 @@ For a temporary alternative to Project Wiki, check `docs/developer_guide.md`
 0. Before cloning the repository, installing and starting the development process, please make sure you have these few things installed on your computer (I personally prefer developing on a \*NIX environment):
   - **[Python 3.6:](https://www.python.org/downloads/)** Python version >= 3.6 is required to run the project, on Ubuntu 18.04, it is the default version when you use `python3`. For other operating systems or distributions however, you may need to specifically write `python3.6`.
 
-  - **[MySQL:](https://www.mysql.com/downloads/)** Download and install MySQL before hand, and create a user `rubikvn01` (or whatever you choose, but you might have to edit the config file).
+  - **[MySQL:](https://www.mysql.com/downloads/)** *Disclaimer: Version 5.7 is used for production. Latest versions of MySQL may or may not work*. Download and install MySQL before hand, and create a user `rubikvn01` (or whatever you choose, but you might have to edit the config file). *NOTE: If you think this is too inconvenient, file an issue so that I know to make changes to accessing the database*
 
   - **[Git:](https://git-scm.com/)** We're using git for version control, so basic understanding of version control, git and github is required.
 
@@ -30,10 +32,9 @@ Those 3 things are essential for running the website, so make sure you have all 
 git clone https://github.com/RubikVN/RubikVNdotOrg.git
 ```
 
-2. Run installation script to have the database set up and project requirements downloaded for you
+2. Run installation script to have the database set up and project requirements downloaded for you. *NOTE: The installation script tends to be erroneous, so please file an issue on this repository if you spot a bug*
 ```bash
 cd rubikvn/
-chmod 755 install.sh
 ./install.sh
 ```
 
