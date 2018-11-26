@@ -6,7 +6,7 @@
 {% block title %} Ranking {% endblock %}
 {% block script %}
 <script>
-  $(document).ready(function() {
+    $(document).ready(function() {
     $(".filter-engine").click(function() {
       $(".extra-filters").toggle('slow');
     });
@@ -33,139 +33,136 @@
 {% endblock %}
 
 {% block body %}
-<div class="main">
-  <div class="page-title">
+<div class="page-title">
     <h1 class="text-center">
-					Ranking for {{ event_name }}
-				</h1>
-  </div>
-  <form action="{{ request.get_full_path }}" method="get">
+        Ranking for {{ event_name }}
+    </h1>
+</div>
+<form action="{{ request.get_full_path }}" method="get">
     <div class="filter">
-      <div class="container">
-        <div class="row">
-            <div class="form-group row">
-              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <input type="text" name="q" class="form-control" placeholder="Use search" value="{{ query }}">
-              </div>
-              <button class="btn btn-primary" type="submit">Find</button>
-              <a class="filter-engine btn btn-danger">More Filters</a>
+        <div class="container">
+            <div class="row">
+                <div class="form-group row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <input type="text" name="q" class="form-control" placeholder="Use search" value="{{ query }}">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Find</button>
+                    <a class="filter-engine btn btn-danger">More Filters</a>
+                </div>
             </div>
         </div>
-      </div>
-      <div class="container extra-filters">
-        <div class="row">
-          <div class="form-inline">
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-              <div class="form-group">
-                <label for="eventId">
-                      Event:
+        <div class="container extra-filters">
+            <div class="row">
+                <div class="form-inline">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label for="eventId">
+                                Event:
 
-                      <select name="eventid" id="eventid" class="drop form-control" style="width:100px">
-                        <option class="event" id="222" value="222" >2x2x2</option>
-                        <option class="event" id="333" value="333" selected="selected">3x3x3</option>
-                        <option class="event" id="444" value="444" >4x4x4</option>
-                        <option class="event" id="555" value="555" >5x5x5</option>
-                        <option class="event" id="666" value="666" >6x6x6</option>
-                        <option class="event" id="777" value="777" >7x7x7</option>
-                        <option class="event" id="333bf" value="333bf" >3x3x3 Blindfolded</option>
-                        <option class="event" id="333fm" value="333fm" >3x3x3 Fewest Moves</option>
-                        <option class="event" id="333oh" value="333oh" >3x3x3 One-Handed</option>
-                        <option class="event" id="333ft" value="333ft" >3x3x3 With Feet</option>
-                        <option class="event" id="clock" value="clock" >Clock</option>
-                        <option class="event" id="minx" value="minx" >Megaminx</option>
-                        <option class="event" id="pyram" value="pyram" >Pyraminx</option>
-                        <option class="event" id="skewb" value="skewb" >Skewb</option>
-                        <option class="event" id="sq1" value="sq1" >Square-1</option>
-                        <option class="event" id="444bf" value="444bf" >4x4x4 Blindfolded</option>
-                        <option class="event" id="555bf" value="555bf" >5x5x5 Blindfolded</option>
-                        <option class="event" id="333mbf" value="333mbf" >3x3x3 Multi-Blind</option>
-                      </select>
-                    </label>
-              </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-              <div class="form-group">
-                <label for="limit">
-                      Limit:
+                                <select name="eventid" id="eventid" class="drop form-control" style="width:100px">
+                                    <option class="event" id="222" value="222">2x2x2</option>
+                                    <option class="event" id="333" value="333" selected="selected">3x3x3</option>
+                                    <option class="event" id="444" value="444">4x4x4</option>
+                                    <option class="event" id="555" value="555">5x5x5</option>
+                                    <option class="event" id="666" value="666">6x6x6</option>
+                                    <option class="event" id="777" value="777">7x7x7</option>
+                                    <option class="event" id="333bf" value="333bf">3x3x3 Blindfolded</option>
+                                    <option class="event" id="333fm" value="333fm">3x3x3 Fewest Moves</option>
+                                    <option class="event" id="333oh" value="333oh">3x3x3 One-Handed</option>
+                                    <option class="event" id="333ft" value="333ft">3x3x3 With Feet</option>
+                                    <option class="event" id="clock" value="clock">Clock</option>
+                                    <option class="event" id="minx" value="minx">Megaminx</option>
+                                    <option class="event" id="pyram" value="pyram">Pyraminx</option>
+                                    <option class="event" id="skewb" value="skewb">Skewb</option>
+                                    <option class="event" id="sq1" value="sq1">Square-1</option>
+                                    <option class="event" id="444bf" value="444bf">4x4x4 Blindfolded</option>
+                                    <option class="event" id="555bf" value="555bf">5x5x5 Blindfolded</option>
+                                    <option class="event" id="333mbf" value="333mbf">3x3x3 Multi-Blind</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label for="limit">
+                                Limit:
 
-                      <select name="limit" id="limit" class="drop form-control">
-                        <option id="100"value="100" selected="selected">100 Persons</option>
-                        <option id="500"value="500">500 Persons</option>
-                        <option id="1000"value="1000">1000 Persons</option>
-                        <option id="All" value="All">All</option>
-                      </select>
-                    </label>
-              </div>
-            </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-              <div class="form-group">
-                <label for="">
+                                <select name="limit" id="limit" class="drop form-control">
+                                    <option id="100" value="100" selected="selected">100 Persons</option>
+                                    <option id="500" value="500">500 Persons</option>
+                                    <option id="1000" value="1000">1000 Persons</option>
+                                    <option id="All" value="All">All</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label for="">
 
-                      <input type="submit" class="form-control singleBtn" value="single" name="category">
-                    </label>
-              </div>
-              <div class="form-group">
-                <label for="">
-                      <input type="submit" class="form-control avgBtn" value="average" name="category" >
-                </label>
-              </div>
+                                <input type="submit" class="form-control singleBtn" value="single" name="category">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="">
+                                <input type="submit" class="form-control avgBtn" value="average" name="category">
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </form>
-  <div class="ranking-table">
+</form>
+<div class="ranking-table">
     <div class="container">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Result</th>
-            <th>Competition</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for result in results %}
-            <tr>
-              <td>{{ result.countryrank }}</td>
-              <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid }}" target="_blank">{{ result.personid__name }}</a></td>
-              <td>{{ result.best }}</td>
-              <td><a href="https:/www.worldcubeassociation.org/competitions/{{ result.competitionid }}" target="_blank">{{ result.competitionid__name }}</a></td>
-            </tr>
-          {% empty %}
-          {% endfor %}
-        </tbody>
-      </table>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Result</th>
+                    <th>Competition</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.countryrank }}</td>
+                    <td><a href="https://www.worldcubeassociation.org/persons/{{ result.personid }}" target="_blank">{{ result.personid__name }}</a></td>
+                    <td>{{ result.best }}</td>
+                    <td><a href="https:/www.worldcubeassociation.org/competitions/{{ result.competitionid }}" target="_blank">{{ result.competitionid__name }}</a></td>
+                </tr>
+                {% empty %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-  </div>
-  <div class="text-center">
+</div>
+<div class="text-center">
     <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-					  <span aria-hidden="true">&laquo;</span>
-					  <span class="sr-only">Previous</span>
-					</a>
-        </li>
-        {% for num in results.paginator.page_range%}
-          {% if num == results.number %}
-          <li class="page-item  active"><a class="page-link" href="#">{{ num }}</a></li>
-          {% elif num > results.number|add:'-4' and num < results.number|add:'4' %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{num}}&eventid={{ eventid }}&limit={{ limit }}&category={{ category }}">{{ num }}</a>
-          </li>
-        {% endif %}
-        {% endfor %}
-          <li>
-            <a class="page-link" href="#" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>
-								</a>
-          </li>
-      </ul>
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            {% for num in results.paginator.page_range%}
+            {% if num == results.number %}
+            <li class="page-item  active"><a class="page-link" href="#">{{ num }}</a></li>
+            {% elif num > results.number|add:'-4' and num < results.number|add:'4' %} <li class="page-item">
+                <a class="page-link" href="?page={{num}}&eventid={{ eventid }}&limit={{ limit }}&category={{ category }}">{{ num }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                <li>
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+        </ul>
     </nav>
-  </div>
 </div>
 {% endblock %}
