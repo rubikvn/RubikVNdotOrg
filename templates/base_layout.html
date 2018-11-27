@@ -14,6 +14,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <script>
+        var requestPath = "{{ request.path }}";
+    </script>
+    <script src="{% static 'js/index.js' %}"></script>
     {% block script-head %} {% endblock %}
 
 </head>
@@ -28,16 +32,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Logo</a>
+            <a class="navbar-brand" href="{% url 'homepage' %}">Logo</a>
         </div>
         <div class="collapse navbar-collapse" id="idxNavbar">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Information</a></li>
-                <li><a href="{% url 'results:index' %}">Results</a></li>
-                <li><a href="{% url 'events:index' %}">Events</a></li>
-                <li><a href="#">Tutorials</a></li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li id="navHome"><a href="{% url 'homepage' %}">Home</a></li>
+                <li id="navInfo"><a href="#">Information</a></li>
+                <li id="navResults"><a href="{% url 'results:index' %}">Results</a></li>
+                <li id="navEvents"><a href="{% url 'events:index' %}">Events</a></li>
+                <li id="navTutorials"><a href="#">Tutorials</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 {% else %}
@@ -74,5 +77,7 @@
 </footer>
 
 </body>
+
+{% block script-foot %} {% endblock %}
 
 </html>
