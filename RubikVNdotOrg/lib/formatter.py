@@ -23,7 +23,7 @@ class ResultFormatter():
                 if self.eventid in official_events:
                     self._format = action
                     return self._format()
-        except Error:
+        except Exception:
             return None
 
     def _format_wca_time(self):
