@@ -39,4 +39,4 @@ def ranking(request):
     return render(request, "results/ranking.html", context)
 
 def index(request):
-    return redirect('ranking')
+    return redirect('results:ranking')
