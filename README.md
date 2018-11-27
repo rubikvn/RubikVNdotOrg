@@ -6,15 +6,15 @@ Source code for https://rubikvietnam.org/
 
 Shoot me an email at <vttrung12@gmail.com> and tell me which part of the project you'd be interested in. Or simply clone this repo, make some changes, create a pull request. If approved, you will be invited to the team.
 
-For a temporary alternative to Project Wiki, check `docs/developer_guide.md`
-
 ### Current progress
 
-* Website is up and running!
-* You can now view rankings of Vietnamese speedcubers for all categories
-* Users will soon be able to log in via OAuth
-* I've just set up TravisCI for this github repository!
-* We need tremendous help to improve our front-end
+* The website is temporarily unavailable for front-end remake and further development of our back-end. Any progress will be announced on this repository.
+  * At the moment, our main focus is to design a user-friendly front-end.
+
+#### Implemented functions
+* Ranking display of speedcubers from Vietnam for all categories.
+* Login system via OAuth integration with WCA website.
+* TravisCI has been set up for this repository, which means we need more testing!
 
 ### Cloning the repo & running the server (first time)
 
