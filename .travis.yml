@@ -16,3 +16,5 @@ before_script:
     - mysql -u root --default-character-set=utf8mb4 test_rubikvn < $TRAVIS_BUILD_DIR/RubikVNdotOrg/db/rubikvn_schema.sql
 script:
     python manage.py test --keepdb
+notifications:
+    email: false
