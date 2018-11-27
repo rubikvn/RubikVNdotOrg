@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 from apps.events.views import oauth_login, oauth_handler, oauth_logout
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="index.html")),
+    path("", RedirectView.as_view(url="home")),
+    path("home", TemplateView.as_view(template_name="index.html"), name="homepage"),
     path("admin/", admin.site.urls),
     path("login/", oauth_login, name="login"),
     path("login/oauth_handler", oauth_handler, name="oauth_handler"),
