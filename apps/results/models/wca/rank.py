@@ -23,7 +23,7 @@ class RankAverage(models.Model):
     @staticmethod
     def get_rank_average(eventid='333', limit='100', query=''):
         try:
-            if limit == 'All':
+            if limit == 'all':
                 limit = None
             else:
                 limit = int(limit)
@@ -62,7 +62,7 @@ class RankSingle(models.Model):
     @staticmethod
     def get_rank_single(eventid='333', limit='100', query=''):
         try:
-            if limit == 'All':
+            if limit == 'all':
                 limit = None
             else:
                 limit = int(limit)
