@@ -15,6 +15,14 @@ function triggerActive(pathName) {
     }
 };
 
+$(window).scroll(function() {
+    if ($(this).scrollTop() < 50) {
+        $("#goTop").css("visibility", "hidden");
+    } else {
+        $("#goTop").css("visibility", "visible");
+    }
+})
+
 $(document).ready(function() {
     triggerActive(requestPath);
 });
