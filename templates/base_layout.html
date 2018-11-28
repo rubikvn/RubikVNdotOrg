@@ -1,71 +1,87 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>{% block title %}{% endblock %} | RubikVN</title>
-  {% block style %} {% endblock %}
+    <title>{% block title %} {% endblock %} | RubikVN</title>
+    {% block style %} {% endblock %}
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> {% block script %} {% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <script>
+        var requestPath = "{{ request.path }}";
+    </script>
+    <script src="{% static 'js/index.js' %}"></script>
+    {% block script-head %} {% endblock %}
+
 </head>
 
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-        <a class="navbar-brand" href="/"><span><img src="{%static "results/img/logo.png"%}" alt="">	</span>CubingVN</a>
-      </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/results/ranking">Results</a></li>
-          <li><a href="#">Events</a></li>
-          <li><a href="#">Beginners</a></li>
-          <li><a href="#">Information</a></li>
-          {% if user.is_authenticated %}
-              <li><a href="/logout">Logout</a></li>
-          {% else %}
-              <li><a href="/login">Login</a></li>
-          {% endif %}
-        </ul>
-      </div>
-      <!-- /.navbar-collapse -->
-    </div>
-  </nav>
-
-  {% block body %} {% endblock %}
-  <!-- Footer -->
-  <div class="footer">
-    <div class="container text-center">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-          <a href="https://github.com/RubikVN/RubikVNdotOrg" target="_blank" class="btn btn-default">
-                        <i class="fab fa-github"></i>
-                    </a>
-          <a href="https://www.facebook.com/rubikvnclub/" target="_blank" class="btn btn-default">
-                        <i class="fab fa-facebook"></i>
-                    </a>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#idxNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'homepage' %}">Logo</a>
         </div>
-      </div>
+        <div class="collapse navbar-collapse" id="idxNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li id="navHome"><a href="{% url 'homepage' %}">Home</a></li>
+                <li id="navInfo"><a href="#">Information</a></li>
+                <li id="navResults"><a href="{% url 'results:index' %}">Results</a></li>
+                <li id="navEvents"><a href="{% url 'events:index' %}">Events</a></li>
+                <li id="navTutorials"><a href="#">Tutorials</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
-  </div>
-  <!-- End footer -->
+</nav>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+        {% block left-side %} {% endblock %}
+        </div>
+
+        <div class="col-sm-8 text-left">
+        {% block main %} {% endblock %}
+        </div>
+
+        <div class="col-sm-2 sidenav">
+        {% block right-side %} {% endblock %}
+        </div>
+    </div>
+</div>
+
+<a id="goTop" href="#top">
+    <i class="fa fa-chevron-up" style="font-size:48px;"></i>
+</a>
+
+<footer class="container-fluid text-center">
+    <a href="https://github.com/RubikVN/RubikVNdotOrg/" target="_blank" class="btn btn-default">
+        <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.facebook.com/rubikvnclub/" target="_blank" class="btn btn-default">
+        <i class="fab fa-facebook"></i>
+    </a>
+</footer>
+
 </body>
+
+{% block script-foot %} {% endblock %}
 
 </html>
