@@ -29,11 +29,11 @@ def api_ranking(request):
     if request.method != "GET":
         context["Error"] = "Method not supported!"
     else:
-        eventid = request.GET.get("eventid", "333")
-        limit = request.GET.get("limit", "100")
-        category = request.GET.get("category", "single")
-        query = request.GET.get("q", "")
-        page = request.GET.get('page')
+        eventid = request.GET.get("eventid", "333").lower()
+        limit = request.GET.get("limit", "100").lower()
+        category = request.GET.get("category", "single").lower()
+        query = request.GET.get("query", "").lower()
+        page = request.GET.get('page', '1').lower()
         event_name = Event.get_event_name(eventid)
         results = []
 
