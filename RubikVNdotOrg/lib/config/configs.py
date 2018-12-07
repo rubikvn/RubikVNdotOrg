@@ -4,7 +4,7 @@ import configparser
 class ServerConfig():
     def __init__(self):
         config = configparser.ConfigParser()
-        if os.getenv("RUNNING_TRAVIS") == "true":
+        if os.getenv("RUNNING_TRAVIS") == "true" or os.getenv("RBVN_DEVELOPING") == "true":
             config.read('./RubikVNdotOrg/lib/config/rubikvn-default.cnf')
         else:
             config.read('./RubikVNdotOrg/lib/config/rubikvn.cnf')
