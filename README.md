@@ -2,21 +2,26 @@
 
 Source code for https://rubikvietnam.org/
 
-### Getting involved
+## Getting involved
+--------------------
 
 Shoot me an email at <vttrung12@gmail.com> and tell me which part of the project you'd be interested in. Or simply clone this repo, make some changes, create a pull request. If approved, you will be invited to the team.
 
-### Current progress
+## Current progress
+-------------------
 
 * The website is temporarily unavailable for front-end remake and further development of our back-end. Any progress will be announced on this repository.
   * At the moment, our main focus is to design a user-friendly front-end.
 
-#### Implemented functions
+### Implemented functions
+-------------------------
+
 * Ranking display of speedcubers from Vietnam for all categories.
 * Login system via OAuth integration with WCA website.
 * TravisCI has been set up for this repository, which means we need more testing!
 
-### Running the server locally
+## Running the server locally
+-----------------------------
 
 Make sure that your 8000 and 3306 port are clear (i.e no service on your computer is using it). Have [Docker and Docker compose](https://www.docker.com/) ready, whatever OS you're using. Clone this repository to your machine, cd into it, then run:
 
