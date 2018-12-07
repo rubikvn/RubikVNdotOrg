@@ -2,6 +2,8 @@
 
 Source code for https://rubikvietnam.org/
 
+[![Build Status](https://travis-ci.com/RubikVN/RubikVNdotOrg.svg?branch=master)](https://travis-ci.com/RubikVN/RubikVNdotOrg)
+
 -----------------------------------------
 
 ## Getting involved
@@ -25,6 +27,12 @@ Make sure that your 8000 and 3306 port are clear (i.e no service on your compute
 
 ```bash
 docker-compose up -d --build
+
+#then
+./setup_db.sh       # For MacOS or Linux
+./setup_db.win.sh   # For Docker on Windows
+
 ```
+
 
 Installation may take a while depending on your internet connection. After everything is done and you see 2 containers have been set up. Open your favorite browser and visit "localhost:8000/", you should see the index page of the website.
