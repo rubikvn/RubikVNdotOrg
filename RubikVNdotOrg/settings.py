@@ -26,12 +26,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = server_configs.key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True if os.getenv("RBVN_DEVELOPING") == "true" else False
 
 ALLOWED_HOSTS = ['178.128.49.215', 'rubikvietnam.org', 'www.rubikvietnam.org', 'localhost']
 
-
 # Application definition
+
 
 INSTALLED_APPS = [
     'apps.results.apps.ResultsConfig',
@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'rubikvn',
         'USER': server_configs.db_uname,
         'PASSWORD': server_configs.db_password,
-        'HOST': 'localhost',
+        'HOST': server_configs.db_host,
         'PORT': '3306',
     }
 }
