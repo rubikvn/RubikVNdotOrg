@@ -4,7 +4,10 @@ import configparser
 class ServerConfig():
     def __init__(self):
         config = configparser.ConfigParser()
-        if os.getenv("RUNNING_TRAVIS") == "true" or os.getenv("RBVN_DEVELOPING") == "true":
+        TRAVIS = os.getenv("RUNNING_TRAVIS") == "true"
+        DEVELOPING = os.getenv("RBVN_DEVELOPING") == "true"
+
+        if TRAVIS or DEVELOPING:
             config.read('./RubikVNdotOrg/lib/config/rubikvn-default.cnf')
         else:
             config.read('./RubikVNdotOrg/lib/config/rubikvn.cnf')
@@ -15,6 +18,7 @@ class ServerConfig():
         # Database credentials
         self.db_uname = config['Database']['mysql_username']
         self.db_password = config['Database']['mysql_password']
+        self.db_host = 'localhost' if TRAVIS else 'db'
 
         # OAuth2 application information
         self.oauth_client_id = config['OAuth2']['client_id']

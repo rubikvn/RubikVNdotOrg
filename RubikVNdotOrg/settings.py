@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'rubikvn',
         'USER': server_configs.db_uname,
         'PASSWORD': server_configs.db_password,
-        'HOST': 'db',
+        'HOST': server_configs.db_host,
         'PORT': '3306',
     }
 }
