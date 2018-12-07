@@ -29,8 +29,8 @@ Make sure that your 8000 and 3306 port are clear (i.e no service on your compute
 docker-compose up -d --build
 
 #then
-./setup_db.sh       # For MacOS or Linux
-./setup_db.win.sh   # For Docker on Windows
+bash ./setup_db.sh       # For MacOS or Linux
+bash ./setup_db.win.sh   # For Docker on Windows
 
 ```
 
