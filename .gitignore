@@ -1,8 +1,7 @@
 # Directories
 __pycache__/
-backups/
 static-collected/
-rbvn-env/
+wca_export/
 .vscode/
 .archive/
 admin/
