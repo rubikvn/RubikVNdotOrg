@@ -6,13 +6,13 @@ python:
 services:
     - mysql
 env:
-    - DJANGO=2.1.2 DB=mysql RUNNING_TRAVIS=true
+    - RUNNING_TRAVIS=true
 install:
     - pip install --upgrade pip
     - pip install pipenv
     - pipenv install --system --skip-lock
 before_script:
-    - cat "$TRAVIS_BUILD_DIR/RubikVNdotOrg/db/my.cnf" | sudo tee /etc/mysql/my.cnf
+    - sudo cat "$TRAVIS_BUILD_DIR/RubikVNdotOrg/db/my.cnf" > /etc/mysql/my.cnf
     - sudo service mysql restart
     - mysql -e 'CREATE DATABASE IF NOT EXISTS test_rubikvn;'
     - mysql -u root --default-character-set=utf8mb4 test_rubikvn < $TRAVIS_BUILD_DIR/RubikVNdotOrg/db/rubikvn_schema.sql
