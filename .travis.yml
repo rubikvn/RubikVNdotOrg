@@ -12,7 +12,7 @@ install:
     - pip install pipenv
     - pipenv install --system --skip-lock
 before_script:
-    - cat "$TRAVIS_BUILD_DIR/RubikVNdotOrg/db/my.cnf" | sudo tee -a /etc/mysql/my.cnf
+    - cat "$TRAVIS_BUILD_DIR/RubikVNdotOrg/db/my.cnf" | sudo tee /etc/mysql/my.cnf
     - sudo service mysql restart
     - mysql -e 'CREATE DATABASE IF NOT EXISTS test_rubikvn;'
     - mysql -u root --default-character-set=utf8mb4 test_rubikvn < $TRAVIS_BUILD_DIR/RubikVNdotOrg/db/rubikvn_schema.sql
