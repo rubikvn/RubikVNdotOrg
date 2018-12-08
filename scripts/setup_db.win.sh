@@ -8,7 +8,7 @@ docker-compose up -d db
 docker cp RubikVNdotOrg\\db\\my.cnf rbvn_mysql_database:/root
 docker cp RubikVNdotOrg\\db\\rubikvn_schema.sql rbvn_mysql_database:/root
 
-docker-compose exec db bin/bash -c "cat /root/my.cnf | tee -a /etc/mysql/my.cnf"
+docker-compose exec db bin/bash -c "cat /root/my.cnf | tee /etc/mysql/my.cnf"
 # Apply changes to config
 docker-compose restart db
 
