@@ -26,7 +26,7 @@ echo -e "\033[1;32mDone\033[0m"
 
 echo -ne "\033[1;36mMoving SQL scripts to container...\033[0m"
 
-docker cp ../vn_db_export.sql rbvn_mysql_database:/root
+docker cp ../vn_db_import.sql rbvn_mysql_database:/root
 docker cp WCA_export.sql rbvn_mysql_database:/root
 
 echo -e "\033[1;32mDone\033[0m"
@@ -35,7 +35,7 @@ echo -e "\033[1;36mRunning import scripts...\033[0m"
 cd $ORIGINAL_DIR
 docker-compose exec db /bin/bash -c "mysql -e 'CREATE DATABASE IF NOT EXISTS wca';"
 docker-compose exec db /bin/bash -c "mysql -u root --default-character-set=utf8mb4 wca < /root/WCA_export.sql"
-docker-compose exec db /bin/bash -c "mysql -u root < /root/vn_db_export.sql"
+docker-compose exec db /bin/bash -c "mysql -u root < /root/vn_db_import.sql"
 
 echo -e "\033[1;32mDone\033[0m"
 
