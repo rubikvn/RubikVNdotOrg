@@ -67,7 +67,7 @@
 
 {% block script-foot %}
 <script>
-$("#filterForm").on("submit", function(event) {
+$("#filterForm").submit(function(event) {
     event.preventDefault();
     $.get(rankingApi, $(this).serialize(), function(response) {
         updateRankingTable(response["results"]);
