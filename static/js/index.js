@@ -21,8 +21,11 @@ $(window).scroll(function() {
     } else {
         $("#goTop").css("visibility", "visible");
     }
-})
+});
 
 $(document).ready(function() {
     triggerActive(requestPath);
+    $("#goTop").click(function() {
+        $("html, body").animate({scrollTop: 0}, "fast");
+    });
 });

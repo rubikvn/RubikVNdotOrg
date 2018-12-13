@@ -2,6 +2,7 @@ const baseWcaUrlPerson = "https://www.worldcubeassociation.org/persons/";
 const baseWcaUrlCompetition = "https://www.worldcubeassociation.org/competitions/";
 
 function updateRankingTable(entries) {
+    $("html, body").animate({scrollTop: 0}, "fast");
     var rankingTable = $("#rankingTable");
     rankingTable.empty();
     $.each(entries, function() {
