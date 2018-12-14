@@ -6,10 +6,10 @@ mysql_username = root
 mysql_password =
 
 [OAuth2]
-client_id =
-client_secret =
-callback_uri = http://localhost/login/oauth_handler
-default_scope = public
-base_url_authorize = https://www.worldcubeassociation.org/oauth/authorize?
-base_url_fetch_token = https://www.worldcubeassociation.org/oauth/token
-base_url_api = https://www.worldcubeassociation.org/api/v0/
+client_id = example-application-id
+client_secret = example-secret
+callback_uri = http://localhost:8000/login/oauth_handler
+default_scope = public dob email manage_competitions
+base_url_authorize = https://staging.worldcubeassociation.org/oauth/authorize?
+base_url_fetch_token = https://staging.worldcubeassociation.org/oauth/token
+base_url_api = https://staging.worldcubeassociation.org/api/v0/
