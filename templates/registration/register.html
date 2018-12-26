@@ -2,15 +2,13 @@
 
 {% load static %}
 
-{% block title %} Login with email {% endblock %}
+{% block title %} Register {% endblock %}
 
 {% block main %}
-<h1>Login with email</h1>
+<h1>Register a new account</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>
 </form>
-
-Do not have an account? Register <a href="{% url 'register' %}">Here</a>
 {% endblock %}

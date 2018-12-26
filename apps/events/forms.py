@@ -60,7 +60,8 @@ class UserUpdateForm(forms.ModelForm):
         )
         # Render some fields as read-only if the user has connected with WCA
         widgets = {
-           "wca_id": forms.TextInput(attrs={"disabled": True})
+            "email": forms.TextInput(attrs={"readonly": True}),
+            "wca_id": forms.TextInput(attrs={"readonly": True})
         }
 
     def clean_password(self):

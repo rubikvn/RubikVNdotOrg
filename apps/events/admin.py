@@ -33,6 +33,7 @@ class UserAdmin(BaseUserAdmin):
     )
     search_fields = ("email",)
     ordering = ("email",)
+    readonly_fields = ("email", "wca_id", )
     filter_horizontal = ()
 
 # Register the new UserAdmin

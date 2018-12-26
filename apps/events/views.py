@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.utils.http import urlencode
 
 from RubikVNdotOrg.settings import server_configs
+from .forms import UserCreationForm
 
 
 def login(request):
@@ -42,3 +43,13 @@ def login_oauth_callback(request):
 
 # TODO: Views for registering and updating profile, with an option to
 # connect with WCA account.
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login_pw")
+
+    form = UserCreationForm()
+    ctx = {"form": form}
+    return render(request, "registration/register.html", ctx)
