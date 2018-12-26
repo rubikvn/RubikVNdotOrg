@@ -1,13 +1,23 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib import auth
+from django.contrib.auth import views as auth_views
 from django.shortcuts import render, redirect
 from django.utils.http import urlencode
 
 from RubikVNdotOrg.settings import server_configs
 
 
-def oauth_login(request):
+def login(request):
+    # Let user choose whether to login with WCA account
+    # or with email + password
     if request.user.is_authenticated:
-        return redirect("/")
+        return redirect("homepage")
+    else:
+        return render(request, "registration/login_method.html")
+
+def login_oauth(request):
+    # Perform OAuth login
+    if request.user.is_authenticated:
+        return redirect("homepage")
     else:
         payload = {
             "client_id" : server_configs.oauth_client_id,
@@ -18,21 +28,17 @@ def oauth_login(request):
         url_authorize = server_configs.oauth_base_url_authorize + urlencode(payload)
         return redirect(url_authorize)
 
-def oauth_handler(request):
+def login_oauth_callback(request):
     code = request.GET.get("code")
     if code is None:
-        return redirect("/")
+        return redirect("homepage")
     else:
-        user = authenticate(request, code=code)
+        user = auth.authenticate(request, code=code)
 
         if user:
-            login(request, user)
+            auth.login(request, user)
 
-        return redirect("/")
+        return redirect("homepage")
 
-def oauth_logout(request):
-    if not request.user.is_authenticated:
-        pass
-    else:
-        logout(request)
-    return redirect("/")
+# TODO: Views for registering and updating profile, with an option to
+# connect with WCA account.
