@@ -95,9 +95,15 @@ class User(AbstractBaseUser):
     def can_manage_comps(self):
         return self.manage_competitions
 
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
     @property
     def is_staff(self):
-        return self.is_admin
+        return self.is_superuser
 
     def __str__(self):
         return f"Name: {self.name}, WCA ID: {self.wca_id}, email: {self.email}"
