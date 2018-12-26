@@ -16,10 +16,10 @@ class OAuthBackend():
         except User.DoesNotExist:
             user = User()
 
-            user.fill_personal_info_from_api_dict(user_info)
-            user.fill_login_info_from_api_dict(token_info)
+        user.fill_personal_info_from_api_dict(user_info)
+        user.fill_login_info_from_api_dict(token_info)
 
-            user.save()
+        user.save()
 
         return user
 
