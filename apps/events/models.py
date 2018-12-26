@@ -9,27 +9,31 @@ from apps.results.models import Country
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, email, name, password=None, **extra_fields):
+    def create_user(self, email, name, password=None):
+        """
+        Creates and saves a User with the given email, name and password.
+        """
         if not email:
-            raise ValueError("The given email must be set")
-        else:
-            email = self.normalize_email(email)
-            user = self.model(email=email, name=name, **extra_fields)
-            user.set_password(password)
-            user.save(self._db)
-            return user
+            raise ValueError("Users must have an email address")
+        user = self.model(
+            email=self.normalize_email(email),
+            name=name
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-    def create_user(self, email, name, password=None, **extra_fields):
-        extra_fields.setdefault("is_superuser", False)
-        return self._create_user(email, name, password, **extra_fields)
-
-
-    def create_superuser(self, email, name, password=None, **extra_fields):
-        extra_fields.setdefault("is_superuser", True)
-
-        if extra_fields.get("is_superuser") is False:
-            raise ValueError("Superuser must have is_superuser = True.")
-        return self._create_user(email, name, password, **extra_fields)
+    def create_superuser(self, email, name, password=None):
+        """
+        Creates and saves a super User with the given email, name and password.
+        """
+        user = self.create_user(email,
+            password=password,
+            name=name
+        )
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
 
     def get_by_natural_key(self, email):
         return self.get(email=email)
@@ -92,12 +96,8 @@ class User(AbstractBaseUser):
         return self.manage_competitions
 
     @property
-    def is_active_property(self):
-        return self.is_active
-
-    @property
-    def is_superuser_property(self):
-        return self.is_superuser
+    def is_staff(self):
+        return self.is_admin
 
     def __str__(self):
         return f"Name: {self.name}, WCA ID: {self.wca_id}, email: {self.email}"
