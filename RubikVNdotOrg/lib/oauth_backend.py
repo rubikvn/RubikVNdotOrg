@@ -1,21 +1,20 @@
 import requests
 
 from RubikVNdotOrg.settings import server_configs
-from apps.events.models import Cuber
-from apps.results.models import Country
+from apps.events.models import User
 
-# print(server_configs.oauth_client_id)
+
 class OAuthBackend():
 
     def authenticate(self, request, code):
         token_info, user_info = self._oauth_authorize(request, code)
 
         try:
-            user_wca_id = user_info["me"]["wca_id"]
-            user = Cuber.objects.get(wca_id=user_wca_id)
+            email = user_info["me"]["email"]
+            user = User.objects.get(email=email)
 
-        except Cuber.DoesNotExist:
-            user = Cuber()
+        except User.DoesNotExist:
+            user = User()
 
             user.fill_personal_info_from_api_dict(user_info)
             user.fill_login_info_from_api_dict(token_info)
@@ -24,10 +23,10 @@ class OAuthBackend():
 
         return user
 
-    def get_user(self, wca_id):
+    def get_user(self, email):
         try:
-            return Cuber.objects.get(pk=wca_id)
-        except Cuber.DoesNotExist:
+            return User.objects.get(pk=email)
+        except User.DoesNotExist:
             return None
 
     def _oauth_authorize(self, request, code):

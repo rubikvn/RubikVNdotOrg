@@ -96,7 +96,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
-AUTH_USER_MODEL = 'events.Cuber'
+AUTH_USER_MODEL = 'events.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -115,9 +115,19 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     'RubikVNdotOrg.lib.oauth_backend.OAuthBackend',
-    'django.contrib.auth.backends.ModelBackend'
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
+LOGIN_REDIRECT_URL = "homepage"
+LOGOUT_REDIRECT_URL = "homepage"
+
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# SESSION_SAVE_EVERY_REQUEST = True
+# SESSION_COOKIE_AGE = 86400
+# SESSION_COOKIE_DOMAIN = None
+# SESSION_COOKIE_NAME = "DSESSIONID"
+# SESSION_COOKIE_SECURE = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
