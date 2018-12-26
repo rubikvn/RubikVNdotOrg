@@ -96,7 +96,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
-AUTH_USER_MODEL = 'events.Cuber'
+AUTH_USER_MODEL = 'events.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

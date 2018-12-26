@@ -1,14 +1,15 @@
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
-
 from apps.results.models import Country
+from apps.results.models import Event
+from django.utils import timezone
 
 # Create your models here.
 class CuberManager(models.Manager):
     def get_by_natural_key(self, wca_id):
         return self.get(wca_id=wca_id)
 
-class Cuber(AbstractBaseUser):
+class User(AbstractBaseUser):
     wca_id = models.CharField(primary_key=True, max_length=10)
     name = models.CharField(max_length=80, blank=True)
     email = models.EmailField(default='')
@@ -51,3 +52,46 @@ class Cuber(AbstractBaseUser):
 
     def __str__(self):
         return f"Name: {self.name}, WCA ID: {self.wca_id}"
+
+
+class CubingEvent(models.Model):
+    name = models.CharField(max_length=100)
+    type = models.CharField(max_length=100)
+    delegates = models.ManyToManyField(User, related_name='delagated_events')
+    non_wca_organizers = models.CharField(max_length=200, blank=True)
+    wca_organizers = models.ManyToManyField(User)
+    registered = models.ManyToManyField(User, through='CompletedRegistration', related_name='registered_events')
+    waitlisted = models.ManyToManyField(User, through='PendingRegistration', related_name='waitlisted_events')
+    city_name = models.CharField(max_length=100)
+    # info_url = models.
+    registration_open = models.DateTimeField()
+    registration_close = models.DateTimeField()
+    registration_pay_open = models.DateTimeField(blank=True, default=registration_open)
+    registration_pay_close = models.DateTimeField(blank=True, default=registration_close)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    contact_number = models.BigIntegerField(blank=True)
+    contact_email = models.EmailField(blank=True)
+    location = models.CharField(max_length=500)
+    attendant_limit = models.IntegerField(blank=True, default=1000)
+    events = models.ManyToManyField(Event)
+    created_at = models.DateTimeField(editable=False)
+    updated_at = models.DateTimeField()
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created_at = timezone.now()
+        self.updated_at = timezone.now()
+        return super(CubingEvent, self).save(*args, **kwargs)
+class Registration(models.Model):
+    cubing_event = models.ForeignKey(CubingEvent, on_delete=models.CASCADE)
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
+    events = models.ManyToManyField(Event)
+    request = models.TextField(max_length=500, blank=True)
+    comment = models.TextField(max_length=500, blank=True)
+    class Meta:
+        abstract = True
+class CompletedRegistration(Registration):
+    is_completed = True
+
+class PendingRegistration(Registration):
+    is_completed = False
