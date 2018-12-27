@@ -8,7 +8,8 @@ mysql_password =
 [OAuth2]
 client_id = ad5cc277c68f2b0812b96053650b18c44fd8b96d10fd6f9ab55298ee69ad9eac
 client_secret = ad94645f5e4c2b8cfb45c23af1cc48936cb902ca643cc4727c17062f7fad07d2
-callback_uri = http://localhost:8000/login/oauth/callback
+callback_uri_login = http://localhost:8000/login/oauth/callback
+callback_uri_connect = http://localhost:8000/profile/connect/callback
 default_scope = public dob email manage_competitions
 base_url_authorize = https://staging.worldcubeassociation.org/oauth/authorize?
 base_url_fetch_token = https://staging.worldcubeassociation.org/oauth/token

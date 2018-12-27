@@ -28,16 +28,19 @@ urlpatterns = [
     path("login/oauth/", ev.login_oauth, name="login_oauth"),
     path("login/oauth/callback", ev.login_oauth_callback, name="login_oauth_callback"),
     path(
-        "login/pw/",
+        "login/password/",
         auth_views.LoginView.as_view(
             template_name="registration/login.html",
             redirect_field_name="homepage",
             redirect_authenticated_user=True
         ),
-        name="login_pw"
+        name="login_password"
     ),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("register/", ev.register, name="register"),
+    path("profile/edit", ev.profile, name="profile"),
+    path("profile/connect", ev.profile_connect, name="connect"),
+    path("profile/connect/callback", ev.profile_connect_callback, name="connect_callback"),
     path("results/", include("apps.results.urls")),
     path("events/", include("apps.events.urls")),
 ]

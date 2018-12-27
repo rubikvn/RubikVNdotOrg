@@ -43,7 +43,6 @@ class User(AbstractBaseUser):
     # Personal info
     # Email used by WCA account will override email used for signup
     email = models.EmailField(primary_key=True, max_length=80)
-    wca_id = models.CharField(unique=True, max_length=10, null=True)
     name = models.CharField(max_length=80)
     date_of_birth = models.DateField(null=True)
     gender = models.CharField(max_length=1, null=True)
@@ -51,12 +50,13 @@ class User(AbstractBaseUser):
     manage_competitions = models.BooleanField(default=False, null=True)
 
     # OAuth token
-    access_token = models.CharField(max_length=80, null=True)
-    refresh_token = models.CharField(max_length=80, null=True)
-    token_type = models.CharField(max_length=20, null=True)
-    token_scope = models.CharField(max_length=50, null=True)
-    token_created_at = models.IntegerField(null=True)
-    token_expiry = models.IntegerField(null=True)
+    wca_id = models.CharField(unique=True, max_length=10, null=True, blank=True)
+    access_token = models.CharField(max_length=80, null=True, blank=True)
+    refresh_token = models.CharField(max_length=80, null=True, blank=True)
+    token_type = models.CharField(max_length=20, null=True, blank=True)
+    token_scope = models.CharField(max_length=50, null=True, blank=True)
+    token_created_at = models.IntegerField(null=True, blank=True)
+    token_expiry = models.IntegerField(null=True, blank=True)
 
     # Permissions
     is_active = models.BooleanField(default=True)

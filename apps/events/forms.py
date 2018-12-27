@@ -45,7 +45,15 @@ class UserUpdateForm(forms.ModelForm):
     fields on the user, but replaces the password field with admin's password
     hash display field.s
     """
-    password = ReadOnlyPasswordHashField()
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateForm, self).__init__(*args, **kwargs)
+        instance = getattr(self, "instance", None)
+        if instance and instance.wca_id:
+            self.fields["name"].widget.attrs["readonly"] = True
+            self.fields["date_of_birth"].widget.attrs["readonly"] = True
+            self.fields["gender"].widget.attrs["readonly"] = True
+            self.fields["country"].widget.attrs["readonly"] = True
+        self.fields["password"] = ReadOnlyPasswordHashField()
 
     class Meta:
         model = User
