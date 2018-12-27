@@ -102,16 +102,16 @@ class CubingEvent(models.Model):
         self.__start_end_date_validate()
         self.__valid_time_validate()
 
-    def __registration_validate(self):
+    def _registration_validate(self):
         if (self.registration_open is None or self.registration_close is None):
             raise ValidationError(
                 "Neither registration open date nor registration close date can be null")
-    def __start_end_date_validate(self):
+    def _start_end_date_validate(self):
         if(self.start_date is None or self.end_date is None):
             raise ValidationError(
                 "Neither start_date nore end date can be null"
             )
-    def __valid_time_validate(self):
+    def _valid_time_validate(self):
         # Code refactor will be done in future
         if (self.end_date < self.start_date):
             raise ValidationError(
