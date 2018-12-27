@@ -76,8 +76,8 @@ class CubingEvent(models.Model):
     registration_close = models.DateTimeField()
     registration_pay_open = models.DateTimeField(blank=True)
     registration_pay_close = models.DateTimeField(blank=True)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
     contact_number = models.BigIntegerField(blank=True)
     contact_email = models.EmailField(blank=True)
     location = models.CharField(max_length=500)
@@ -85,6 +85,7 @@ class CubingEvent(models.Model):
     events = models.ManyToManyField(Event)
     created_at = models.DateTimeField(editable=False)
     updated_at = models.DateTimeField()
+
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = datetime.now()
@@ -93,7 +94,56 @@ class CubingEvent(models.Model):
             self.registration_pay_open = self.registration_open
         if (self.registration_pay_close is None):
             self.registration_pay_close = self.registration_close
+        self.full_clean()
         return super(CubingEvent, self).save(*args, **kwargs)
+
+    def clean(self):
+        self.__registration_validate()
+        self.__start_end_date_validate()
+        self.__valid_time_validate()
+
+    def __registration_validate(self):
+        if (self.registration_open is None or self.registration_close is None):
+            raise ValidationError(
+                "Neither registration open date nor registration close date can be null")
+    def __start_end_date_validate(self):
+        if(self.start_date is None or self.end_date is None):
+            raise ValidationError(
+                "Neither start_date nore end date can be null"
+            )
+    def __valid_time_validate(self):
+        # Code refactor will be done in future
+        if (self.end_date < self.start_date):
+            raise ValidationError(
+                "End date cannot be before start date"
+            )
+        if (self.registration_close < self.registration_open):
+            raise ValidationError(
+                "Registration close date cannot be before registration open date"
+            )
+        if (self.registration_pay_close < self.registration_pay_open):
+            raise ValidationError(
+                "Registration pay close date cannot be before registration pay open date"
+            )
+        if (self.start_date < self.registration_open):
+            raise ValidationError(
+                "Start date cannot be before registration open date"
+            )
+        if (self.end_date < self.registration_close):
+            raise ValidationError(
+                "End date cannot be before registration close date"
+            )
+        if (self.registration_pay_open < self.registration_open):
+            raise ValidationError(
+                "Registration pay open date cannot be before registration open date"
+            )
+        if (self.registration_close < self.registration_pay_close):
+            raise ValidationError(
+                "Registration close date cannot be before registration pay close date"
+            )
+
+
+
 class Registration(models.Model):
     cubing_event = models.ForeignKey(CubingEvent, on_delete=models.CASCADE)
     user = models.OneToOneField(User, on_delete=models.CASCADE,default='null', blank=False)
