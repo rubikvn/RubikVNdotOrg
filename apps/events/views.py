@@ -113,7 +113,6 @@ def profile_connect_callback(request):
         except KeyError:
             return redirect("profile")
         if user:
-            request.user.delete()
-            auth.login(request, user)
+            pass
 
         return redirect("profile")

@@ -42,7 +42,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     # Personal info
     # Email used by WCA account will override email used for signup
-    email = models.EmailField(primary_key=True, max_length=80)
+    email = models.EmailField(unique=True, max_length=80)
     name = models.CharField(max_length=80)
     date_of_birth = models.DateField(null=True)
     gender = models.CharField(max_length=1, null=True)
