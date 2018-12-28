@@ -3,6 +3,7 @@ __pycache__/
 static-collected/
 wca_export/
 .vscode/
+.idea/
 .archive/
 admin/
 

@@ -16,16 +16,31 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView, RedirectView
+from django.contrib.auth import views as auth_views
 
-from apps.events.views import oauth_login, oauth_handler, oauth_logout
+from apps.events import views as ev
 
 urlpatterns = [
     path("", RedirectView.as_view(url="home")),
     path("home", TemplateView.as_view(template_name="index.html"), name="homepage"),
     path("admin/", admin.site.urls),
-    path("login/", oauth_login, name="login"),
-    path("login/oauth_handler", oauth_handler, name="oauth_handler"),
-    path("logout/", oauth_logout, name="logout"),
+    path("login/", ev.login, name="login"),
+    path("login/oauth/", ev.login_oauth, name="login_oauth"),
+    path("login/oauth/callback", ev.login_oauth_callback, name="login_oauth_callback"),
+    path(
+        "login/password/",
+        auth_views.LoginView.as_view(
+            template_name="registration/login.html",
+            redirect_field_name="homepage",
+            redirect_authenticated_user=True
+        ),
+        name="login_password"
+    ),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("register/", ev.register, name="register"),
+    path("profile/edit", ev.profile, name="profile"),
+    path("profile/connect", ev.profile_connect, name="connect"),
+    path("profile/connect/callback", ev.profile_connect_callback, name="connect_callback"),
     path("results/", include("apps.results.urls")),
     path("events/", include("apps.events.urls")),
 ]

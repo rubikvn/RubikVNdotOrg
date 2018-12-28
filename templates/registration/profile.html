@@ -1,0 +1,23 @@
+{% extends "base_layout.html" %}
+
+{% load static %}
+
+{% block title %} Update your profile {% endblock %}
+
+{% block main %}
+<h1>Update your profile</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+
+<p>
+{% if user.wca_id %}
+    You have already connected your WCA account.
+    You won't be able to edit your personal information
+{% else %}
+    Have a WCA account? <a href="{% url 'connect' %}">Connect here</a>
+{% endif %}
+</p>
+{% endblock %}

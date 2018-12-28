@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
+
+from django.contrib.auth.models import BaseUserManager
+
 from apps.results.models import Country
 from apps.results.models import Event
 from django.utils import timezone
@@ -8,32 +11,70 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 
-# Create your models here.
-class CuberManager(models.Manager):
-    def get_by_natural_key(self, wca_id):
-        return self.get(wca_id=wca_id)
+class UserManager(BaseUserManager):
+    use_in_migrations = True
+
+    def create_user(self, email, name, password=None):
+        """
+        Creates and saves a User with the given email, name and password.
+        """
+        if not email:
+            raise ValueError("Users must have an email address")
+        user = self.model(
+            email=self.normalize_email(email),
+            name=name
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, name, password=None):
+        """
+        Creates and saves a super User with the given email, name and password.
+        """
+        user = self.create_user(email,
+            password=password,
+            name=name
+        )
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+    def get_by_natural_key(self, email):
+        return self.get(email=email)
+
 
 class User(AbstractBaseUser):
-    wca_id = models.CharField(primary_key=True, max_length=10)
-    name = models.CharField(max_length=80, blank=True)
-    email = models.EmailField(default='')
-    date_of_birth = models.DateField()
-    gender = models.CharField(max_length=1, blank=True, null=True)
-    country = models.ForeignKey(Country, models.DO_NOTHING, default='', blank=True)
-    manage_competitions = models.BooleanField(default=False)
+    # Personal info
+    # Email used by WCA account will override email used for signup
+    email = models.EmailField(unique=True, max_length=80)
+    name = models.CharField(max_length=80)
+    date_of_birth = models.DateField(null=True)
+    gender = models.CharField(max_length=1, null=True)
+    country = models.ForeignKey(Country, models.DO_NOTHING, null=True)
+    manage_competitions = models.BooleanField(default=False, null=True)
 
-    # TODO: store access tokens for wca api, and expiry dates as well
-    access_token = models.CharField(max_length=80, blank=True)
-    refresh_token = models.CharField(max_length=80, blank=True)
-    token_type = models.CharField(max_length=20, blank=True)
-    token_scope = models.CharField(max_length=50, blank=True)
-    token_created_at = models.IntegerField(blank=True, null=True)
-    token_expiry = models.IntegerField(blank=True, null=True)
+    # OAuth token
+    wca_id = models.CharField(unique=True, max_length=10, null=True, blank=True)
+    access_token = models.CharField(max_length=80, null=True, blank=True)
+    refresh_token = models.CharField(max_length=80, null=True, blank=True)
+    token_type = models.CharField(max_length=20, null=True, blank=True)
+    token_scope = models.CharField(max_length=50, null=True, blank=True)
+    token_created_at = models.IntegerField(null=True, blank=True)
+    token_expiry = models.IntegerField(null=True, blank=True)
 
-    USERNAME_FIELD = 'wca_id'
+    # Permissions
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = ('name',)
 
-    objects = CuberManager()
+    objects = UserManager()
+
+    class Meta:
+        db_table = 'User'
 
     def fill_personal_info_from_api_dict(self, api_dict):
         self.wca_id = api_dict["me"]["wca_id"]
@@ -51,11 +92,30 @@ class User(AbstractBaseUser):
         self.token_created_at = api_dict["created_at"]
         self.token_expiry = api_dict["expires_in"]
 
+    def natural_key(self):
+        return 'email'
+
+    def get_full_name(self):
+        return self.name
+
+    def get_short_name(self):
+        return self.name.split(" ")[-1]
+
     def can_manage_comps(self):
         return self.manage_competitions
 
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.is_superuser
+
     def __str__(self):
-        return f"Name: {self.name}, WCA ID: {self.wca_id}"
+        return f"Name: {self.name}, WCA ID: {self.wca_id}, email: {self.email}"
 
 
 class CubingEvent(models.Model):
@@ -98,14 +158,15 @@ class CubingEvent(models.Model):
         return super(CubingEvent, self).save(*args, **kwargs)
 
     def clean(self):
-        self.__registration_validate()
-        self.__start_end_date_validate()
-        self.__valid_time_validate()
+        self._registration_validate()
+        self._start_end_date_validate()
+        self._valid_time_validate()
 
     def _registration_validate(self):
         if (self.registration_open is None or self.registration_close is None):
             raise ValidationError(
                 "Neither registration open date nor registration close date can be null")
+
     def _start_end_date_validate(self):
         if(self.start_date is None or self.end_date is None):
             raise ValidationError(
@@ -143,31 +204,36 @@ class CubingEvent(models.Model):
             )
 
 
-
 class Registration(models.Model):
     cubing_event = models.ForeignKey(CubingEvent, on_delete=models.CASCADE)
-    user = models.OneToOneField(User, on_delete=models.CASCADE,default='null', blank=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, default=None, blank=False)
     events = models.ManyToManyField(Event)
     request = models.TextField(max_length=500, blank=True)
     comment = models.TextField(max_length=500, blank=True)
+
     class Meta:
         abstract = True
+
     def save(self, *args, **kwargs):
         self.full_clean()
         return super(Registration, self).save(*args, **kwargs)
+
+
 class CompletedRegistration(Registration):
     is_completed = True
 
     def clean(self, exclude=None):
-        try: 
+        try:
             PendingRegistration.objects.get(user=self.user)
         except:
             return;
         else:
-            raise ValidationError("An user can only have 1 reg")    
+            raise ValidationError("An user can only have 1 reg")
+
 
 class PendingRegistration(Registration):
     is_completed = False
+
     def clean(self, exclude=None):
         try:
             CompletedRegistration.objects.get(user=self.user)
