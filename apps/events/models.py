@@ -73,6 +73,9 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
+    class Meta:
+        db_table = 'User'
+
     def fill_personal_info_from_api_dict(self, api_dict):
         self.wca_id = api_dict["me"]["wca_id"]
         self.name = api_dict["me"]["name"]
@@ -163,7 +166,7 @@ class CubingEvent(models.Model):
         if (self.registration_open is None or self.registration_close is None):
             raise ValidationError(
                 "Neither registration open date nor registration close date can be null")
-            
+
     def _start_end_date_validate(self):
         if(self.start_date is None or self.end_date is None):
             raise ValidationError(
@@ -203,34 +206,34 @@ class CubingEvent(models.Model):
 
 class Registration(models.Model):
     cubing_event = models.ForeignKey(CubingEvent, on_delete=models.CASCADE)
-    user = models.OneToOneField(User, on_delete=models.CASCADE,default='null', blank=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, default=None, blank=False)
     events = models.ManyToManyField(Event)
     request = models.TextField(max_length=500, blank=True)
     comment = models.TextField(max_length=500, blank=True)
-    
+
     class Meta:
         abstract = True
-        
+
     def save(self, *args, **kwargs):
         self.full_clean()
         return super(Registration, self).save(*args, **kwargs)
-      
-      
+
+
 class CompletedRegistration(Registration):
     is_completed = True
 
     def clean(self, exclude=None):
-        try: 
+        try:
             PendingRegistration.objects.get(user=self.user)
         except:
             return;
         else:
-            raise ValidationError("An user can only have 1 reg")    
+            raise ValidationError("An user can only have 1 reg")
 
-            
+
 class PendingRegistration(Registration):
     is_completed = False
-    
+
     def clean(self, exclude=None):
         try:
             CompletedRegistration.objects.get(user=self.user)
