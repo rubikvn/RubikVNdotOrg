@@ -3,6 +3,8 @@ import requests
 from RubikVNdotOrg.settings import server_configs
 from apps.events.models import User
 
+from apps.results.models import Country
+
 
 class OAuthBackend():
 
@@ -32,6 +34,7 @@ class OAuthBackend():
 
     def get_user(self, email):
         try:
+
             return User.objects.get(pk=email)
         except User.DoesNotExist:
             return None
