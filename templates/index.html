@@ -5,5 +5,9 @@
 {% block title %} Homepage {% endblock %}
 
 {% block main %}
-Hello, world
+{% if user.is_authenticated %}
+    Hello, {{ user.get_short_name }}. Edit your profile <a href="{% url 'profile' %}">here</a>
+{% else %}
+    Hello, world
+{% endif %}
 {% endblock %}

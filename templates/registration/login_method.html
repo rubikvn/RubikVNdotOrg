@@ -1,0 +1,19 @@
+{% extends "base_layout.html" %}
+
+{% load static %}
+
+{% block title %} Login {% endblock %}
+
+{% block main %}
+Choose your method of logging in:
+<ul>
+    <li>
+        <a href="{% url 'login_oauth' %}">Log in with WCA account</a>
+    </li>
+    <li>
+        <a href="{% url 'login_password' %}">Log in with email</a>
+    </li>
+</ul>
+
+Do not have an account? Register <a href="{% url 'register' %}">Here</a>
+{% endblock %}
