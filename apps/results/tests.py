@@ -23,7 +23,7 @@ class ApiRankingViewTest(TestCase):
     def test_api_post_returns_error(self):
         response = self.client.post("/results/api/ranking")
         results = json.loads(response.content.decode())
-        self.assertEquals(results.get("error"), "Method not supported")
+        self.assertEquals(results.get("error"), "Http method not supported!")
 
     def test_api_valid_get_params(self):
         pass
