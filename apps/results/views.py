@@ -27,7 +27,7 @@ def api_ranking(request):
     context = {}
 
     if request.method != "GET":
-        context["Error"] = "Method not supported!"
+        context["error"] = "Http method not supported!"
     else:
         eventid = request.GET.get("eventid", "333").lower()
         limit = request.GET.get("limit", "100").lower()
@@ -46,6 +46,7 @@ def api_ranking(request):
         results = list(f.format())
 
         context = {
+            "success" : True,
             "event_name": event_name,
             "eventid": eventid,
             "limit": limit,
