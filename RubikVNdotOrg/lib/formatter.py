@@ -24,7 +24,7 @@ class ResultFormatter():
                     self._format = action
                     return self._format()
         except Exception:
-            return None
+            return []
 
     def _format_wca_time(self):
         for time in self.iterable:
