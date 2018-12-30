@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from .models import *
 from RubikVNdotOrg.lib.formatter import ResultFormatter
+from RubikVNdotOrg.lib.paginator import Paginator
 
 
 def ranking(request):
@@ -30,20 +31,29 @@ def api_ranking(request):
         context["error"] = "Http method not supported!"
     else:
         eventid = request.GET.get("eventid", "333").lower()
-        limit = request.GET.get("limit", "100").lower()
         category = request.GET.get("category", "single").lower()
         query = request.GET.get("query", "").lower()
         page = request.GET.get('page', '1').lower()
+        limit = request.GET.get("limit", "50").lower()
         event_name = Event.get_event_name(eventid)
         results = []
 
         if category == "single":
-            results = RankSingle.get_rank_single(eventid, limit, query)
+            results = RankSingle.get_rank_single(eventid, query)
         elif category == "average":
-            results = RankAverage.get_rank_average(eventid, limit, query)
+            results = RankAverage.get_rank_average(eventid, query)
 
-        f = ResultFormatter(results, "best", eventid, category)
-        results = list(f.format())
+        if not limit.isdigit() or not page.isdigit():
+            results = []
+        else:
+            limit = int(limit)
+            page = int(page)
+
+            p = Paginator(results, int(limit))
+            results = p.get_page(page)
+
+            f = ResultFormatter(results, "best", eventid, category)
+            results = list(f.format())
 
         context = {
             "success" : True,
