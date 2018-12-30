@@ -5,12 +5,44 @@
 {% block title %} Login with email {% endblock %}
 
 {% block main %}
-<h1>Login with email</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
-
-Do not have an account? Register <a href="{% url 'register' %}">Here</a>
+    <div class="col-md-9 green-card ">
+            <div class="row">
+              <div class="card-title">
+                Register
+              </div>
+              <div class="card-content">
+                <form class="green-form" method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                    <img src="{% static "registration-login/img/close-envelope.png" %}" class="icon">
+                    <input autocomplete="on" class="form-input" placeholder="Email" type="email" id="id_username" name="username">
+                  </div>
+                  <div class="row">
+                    <img src="{% static "registration-login/img/locked.png" %}" class="icon"">
+                    <input autocomplete="on" class="form-input" placeholder="Password" type="password" required id="id_password" name="password">
+                  </div>
+                  <div class="row text-center">
+                    <button class="submit">Login</button>
+                  </div>
+                </form>
+                <div class="row text-center">
+                    <p >Do not have an account?<a href="/register"> Register</a></p>
+                </div>
+              </div>
+            </div>
+        </div>
+        <script>
+            var inputs = document.getElementsByTagName('input');
+            for(let i = 0; i < inputs.length; ++i){
+                (() => inputs[i].addEventListener("focus", () => {
+                        inputs[i].classList.add("input-focus");
+                    })
+                )();
+                (() => 
+                    inputs[i].addEventListener("blur", () => {
+                        inputs[i].classList.remove("input-focus");
+                    })
+                )();
+            }
+        </script>
 {% endblock %}
