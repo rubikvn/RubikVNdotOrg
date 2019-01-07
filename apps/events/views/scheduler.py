@@ -93,6 +93,15 @@ def api_browse_events(request):
     if request.method != "GET":
         return HttpResponseNotAllowed(request)
     else:
-        context = {}
+        all_events = CubingEvent.objects.values(
+            "category",
+            "name",
+            "start_date",
+            "location"
+        ).order_by("start_date")
+
+        context = {
+            "events": all_events
+        }
 
         return JsonResponse(context)

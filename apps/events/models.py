@@ -119,12 +119,16 @@ class User(AbstractBaseUser):
 
 
 class CubingEvent(models.Model):
-    type_of_event = (
-        ('wca', 'WCA events'),
-        ('offline', 'Offline events')
+    EVENT_TYPE_WCA = "WCA"
+    EVENT_TYPE_OFFLINE = "OFF"
+
+    EVENT_TYPES = (
+        (EVENT_TYPE_WCA, 'WCA events'),
+        (EVENT_TYPE_OFFLINE, 'Offline events')
     )
+
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=100, choices=type_of_event, default='offline')
+    category = models.CharField(max_length=100, choices=EVENT_TYPES, default=EVENT_TYPE_OFFLINE)
     delegates = models.ManyToManyField(User, related_name='delegated_events')
     non_wca_organizers = models.CharField(max_length=200, blank=True)
     wca_organizers = models.ManyToManyField(User)
