@@ -150,9 +150,9 @@ class CubingEvent(models.Model):
         if not self.id:
             self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        if(self.registration_pay_open is None):
+        if self.registration_pay_open is None:
             self.registration_pay_open = self.registration_open
-        if (self.registration_pay_close is None):
+        if self.registration_pay_close is None:
             self.registration_pay_close = self.registration_close
         self.full_clean()
         return super(CubingEvent, self).save(*args, **kwargs)
@@ -163,42 +163,44 @@ class CubingEvent(models.Model):
         self._valid_time_validate()
 
     def _registration_validate(self):
-        if (self.registration_open is None or self.registration_close is None):
+        if self.registration_open is None or self.registration_close is None:
             raise ValidationError(
                 "Neither registration open date nor registration close date can be null")
 
     def _start_end_date_validate(self):
-        if(self.start_date is None or self.end_date is None):
+        if self.start_date is None or self.end_date is None:
             raise ValidationError(
                 "Neither start_date nore end date can be null"
             )
+
     def _valid_time_validate(self):
         # Code refactor will be done in future
-        if (self.end_date < self.start_date):
+        if self.end_date < self.start_date:
             raise ValidationError(
                 "End date cannot be before start date"
             )
-        if (self.registration_close < self.registration_open):
+
+        if self.registration_close < self.registration_open:
             raise ValidationError(
                 "Registration close date cannot be before registration open date"
             )
-        if (self.registration_pay_close < self.registration_pay_open):
+        if self.registration_pay_close < self.registration_pay_open:
             raise ValidationError(
                 "Registration pay close date cannot be before registration pay open date"
             )
-        if (self.start_date < self.registration_open):
+        if self.start_date < self.registration_open:
             raise ValidationError(
                 "Start date cannot be before registration open date"
             )
-        if (self.end_date < self.registration_close):
+        if self.end_date < self.registration_close:
             raise ValidationError(
                 "End date cannot be before registration close date"
             )
-        if (self.registration_pay_open < self.registration_open):
+        if self.registration_pay_open < self.registration_open:
             raise ValidationError(
                 "Registration pay open date cannot be before registration open date"
             )
-        if (self.registration_close < self.registration_pay_close):
+        if self.registration_close < self.registration_pay_close:
             raise ValidationError(
                 "Registration close date cannot be before registration pay close date"
             )
