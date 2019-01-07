@@ -125,7 +125,7 @@ class CubingEvent(models.Model):
     )
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=100, choices=type_of_event, default='offline')
-    delegates = models.ManyToManyField(User, related_name='delagated_events')
+    delegates = models.ManyToManyField(User, related_name='delegated_events')
     non_wca_organizers = models.CharField(max_length=200, blank=True)
     wca_organizers = models.ManyToManyField(User)
     registered = models.ManyToManyField(User, through='CompletedRegistration', related_name='registered_events')
@@ -170,7 +170,7 @@ class CubingEvent(models.Model):
     def _start_end_date_validate(self):
         if self.start_date is None or self.end_date is None:
             raise ValidationError(
-                "Neither start_date nore end date can be null"
+                "Neither start_date nor end date can be null"
             )
 
     def _valid_time_validate(self):
@@ -228,9 +228,9 @@ class CompletedRegistration(Registration):
         try:
             PendingRegistration.objects.get(user=self.user)
         except:
-            return;
+            return
         else:
-            raise ValidationError("An user can only have 1 reg")
+            raise ValidationError("A user can only have 1 registration")
 
 
 class PendingRegistration(Registration):
@@ -240,6 +240,6 @@ class PendingRegistration(Registration):
         try:
             CompletedRegistration.objects.get(user=self.user)
         except:
-            return;
+            return
         else:
-            raise ValidationError("An user can only have 1 reg")
+            raise ValidationError("A user can only have 1 registration")

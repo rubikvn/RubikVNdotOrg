@@ -14,11 +14,11 @@
                 <form class="green-form" method="POST">
                   {% csrf_token %}
                   <div class="row">
-                    <img src="{% static "registration-login/img/close-envelope.png" %}" class="icon">
+                    <img src="{% static 'registration/img/close-envelope.png' %}" class="icon">
                     <input autocomplete="on" class="form-input" placeholder="Email" type="email" id="id_username" name="username">
                   </div>
                   <div class="row">
-                    <img src="{% static "registration-login/img/locked.png" %}" class="icon"">
+                    <img src="{% static 'registration/img/locked.png' %}" class="icon">
                     <input autocomplete="on" class="form-input" placeholder="Password" type="password" required id="id_password" name="password">
                   </div>
                   <div class="row text-center">
