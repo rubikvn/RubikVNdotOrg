@@ -4,11 +4,38 @@
 
 {% block title %} Browse events {% endblock %}
 
+{% block script-head %}
+<script>
+    var eventBrowseApi = {% url 'events:api_browse' %};
+</script>
+<script src="{% static 'events/js/events.js' %}"></script>
+{% endblock %}
+
 {% block main %}
+
 {% if user.is_authenticated %}
     <p>Hello, {{ user.get_short_name }}</p>
 {% else %}
     <p>Hello, guest</p>
 {% endif %}
 Interested in organizing? Create an event <a href="{% url 'events:create' %}">here</a>
+
+<table class="table table-striped">
+    <thead>
+        <th scope="col">Type</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">Location</th>
+    </thead>
+    <tbody id="eventsTable">
+        <!-- Events are shown here -->
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block script-foot %}
+<script>
+
+</script>
 {% endblock %}
