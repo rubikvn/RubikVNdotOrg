@@ -1,0 +1,56 @@
+{% extends "base_layout.html" %}
+
+{% load static %}
+
+{% block title %} Register {% endblock %}
+
+{% block main %}
+        <div class="col-md-9 green-card ">
+            <div class="row">
+              <div class="card-title">
+                Register
+              </div>
+              <div class="card-content">
+                <form class="green-form" method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                    <img src="{% static 'registration/img/user-account-box.png' %}" class="icon">
+                    <input autocomplete="on" class="form-input" placeholder="Name" type="text"  required id="id_name" name="name">
+                  </div>
+                  <div class="row">
+                    <img src="{% static 'registration/img/close-envelope.png' %}" class="icon">
+                    <input autocomplete="on" class="form-input" placeholder="Email" type="email" required id="id_email" name="email">
+                  </div>
+                  <div class="row">
+                    <img src="{% static 'registration/img/locked.png' %}" class="icon">
+                    <input autocomplete="on" class="form-input" placeholder="Password" type="password" required id="id_password1" name="password1">
+                  </div>
+                  <div class="row">
+                    <img src="{% static 'registration/img/locked.png' %}" class="icon">
+                    <input autocomplete="on" class="form-input" placeholder="Password Confirmation" type="password" required id="id_password_2" name="password2">
+                  </div>
+                  <div class="row text-center">
+                    <button class="submit">Register</button>
+                  </div>
+                </form>
+                <div class="row text-center">
+                    <p >Already have an account?<a href="/login"> Login</a></p>
+                </div>
+              </div>
+            </div>
+        </div>
+      <script>
+          var inputs = document.getElementsByTagName('input');
+          for(let i = 0; i < inputs.length; ++i){
+              (() => inputs[i].addEventListener("focus", () => {
+                      inputs[i].classList.add("input-focus");
+                  })
+              )();
+              (() => 
+                  inputs[i].addEventListener("blur", () => {
+                      inputs[i].classList.remove("input-focus");
+                  })
+              )();
+          }
+    </script>
+{% endblock %}

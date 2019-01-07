@@ -1,41 +1,56 @@
 import requests
 
 from RubikVNdotOrg.settings import server_configs
-from apps.events.models import Cuber
+from apps.events.models import User
+
 from apps.results.models import Country
 
-# print(server_configs.oauth_client_id)
+
 class OAuthBackend():
 
     def authenticate(self, request, code):
+        # TODO: Check for referrer and confirm it's WCA
         token_info, user_info = self._oauth_authorize(request, code)
 
         try:
-            user_wca_id = user_info["me"]["wca_id"]
-            user = Cuber.objects.get(wca_id=user_wca_id)
+            email = user_info["me"]["email"]
+            user = User.objects.get(email=email)
 
-        except Cuber.DoesNotExist:
-            user = Cuber()
+            if request.user.is_authenticated:
+                raise KeyError("That WCA account has been claimed by another person")
 
-            user.fill_personal_info_from_api_dict(user_info)
-            user.fill_login_info_from_api_dict(token_info)
+        except User.DoesNotExist:
+            if request.user.is_authenticated:
+                user = request.user
+            else:
+                user = User()
 
-            user.save()
+        user.fill_personal_info_from_api_dict(user_info)
+        user.fill_login_info_from_api_dict(token_info)
+
+        user.save()
 
         return user
 
-    def get_user(self, wca_id):
+    def get_user(self, email):
         try:
-            return Cuber.objects.get(pk=wca_id)
-        except Cuber.DoesNotExist:
+
+            return User.objects.get(pk=email)
+        except User.DoesNotExist:
             return None
 
     def _oauth_authorize(self, request, code):
+        callback = ""
+
+        if request.user.is_authenticated:
+            callback = "connect"
+        else:
+            callback = "login"
         payload = {
             "grant_type" : "authorization_code",
             "client_id" : server_configs.oauth_client_id,
             "client_secret" : server_configs.oauth_client_secret,
-            "redirect_uri" : server_configs.oauth_callback_uri,
+            "redirect_uri" : server_configs.oauth_callback_uri[callback],
             "code" : code,
         }
 

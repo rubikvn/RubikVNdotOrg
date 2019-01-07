@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
+from django.http import JsonResponse
 from django.urls import reverse
 
 from .models import *
@@ -14,10 +14,11 @@ def ranking(request):
     else:
         return render(request, "results/ranking.html")
 
+
 def api_ranking(request):
     """
     The original implementation of the ranking page involves refreshing the page
-    everytime the user changes a ranking criteria, which can be quite annoying
+    every time the user changes a ranking criteria, which can be quite annoying
     especially if reloading takes a lot of time. This method seeks to resolve
     that issue and improve user experience.
 
@@ -66,6 +67,3 @@ def api_ranking(request):
         }
 
     return JsonResponse(context)
-
-def index(request):
-    return redirect('results:ranking')

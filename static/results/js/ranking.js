@@ -14,7 +14,9 @@ function updateRankingTable(entries) {
             + "<a href='" + baseWcaUrlPerson + entry["personid"] + "' target='_blank'>"
             + entry["personid__name"] + "</a>" + "</td>"
             + "<td>" + entry["best"] + "</td>"
-            + "<td>" + entry["competitionid__name"] + "</td>"
+            + "<td>"
+            + "<a href='" + baseWcaUrlCompetition + entry["competitionid"] + "' target='_blank'>"
+            + entry["competitionid__name"] + "</a>" + "</td>"
             + "</tr>"
         );
     })
