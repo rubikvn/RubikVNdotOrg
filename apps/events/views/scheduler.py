@@ -19,7 +19,7 @@ def browse_events(request):
         return render(request, "events/events.html")
 
 
-def event_detail(request):
+def event_details(request):
     """
     View details about an event.
 
@@ -29,7 +29,7 @@ def event_detail(request):
     if request.method != "GET":
         return HttpResponseNotAllowed(request)
     else:
-        return render(request, "events/event_detail.html")
+        return render(request, "events/event_details.html")
 
 
 @login_required()

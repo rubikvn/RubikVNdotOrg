@@ -13,10 +13,11 @@ def ranking(request):
     else:
         return render(request, "results/ranking.html")
 
+
 def api_ranking(request):
     """
     The original implementation of the ranking page involves refreshing the page
-    everytime the user changes a ranking criteria, which can be quite annoying
+    every time the user changes a ranking criteria, which can be quite annoying
     especially if reloading takes a lot of time. This method seeks to resolve
     that issue and improve user experience.
 
@@ -55,6 +56,3 @@ def api_ranking(request):
         }
 
     return JsonResponse(context)
-
-def index(request):
-    return redirect('results:ranking')

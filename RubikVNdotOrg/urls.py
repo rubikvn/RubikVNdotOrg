@@ -21,8 +21,8 @@ from django.contrib.auth import views as auth_views
 from apps.events.views import registration as reg
 
 urlpatterns = [
-    path("", RedirectView.as_view(url="home")),
-    path("home", TemplateView.as_view(template_name="index.html"), name="homepage"),
+    path("", RedirectView.as_view(pattern_name="homepage")),
+    path("home/", TemplateView.as_view(template_name="index.html"), name="homepage"),
     path("admin/", admin.site.urls),
     path("login/", reg.login, name="login"),
     path("login/oauth/", reg.login_oauth, name="login_oauth"),
