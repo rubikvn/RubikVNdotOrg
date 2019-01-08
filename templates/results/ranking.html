@@ -6,7 +6,7 @@
 
 {% block script-head %}
 <script>
-    var rankingApi = "{% url 'results:api_ranking' %}";
+    const rankingApi = "{% url 'results:api_ranking' %}";
 </script>
 <script src="{% static 'results/js/ranking.js' %}"></script>
 {% endblock %}
@@ -25,9 +25,9 @@
         <div class="form-group">
             <label for="limitSelect">Page limit</label>
             <select name="limit" id="limitSelect">
-                <option value="25">25</option>
+                <option value="25" selected>25</option>
                 <option value="50">50</option>
-                <option value="100" selected>100</option>
+                <option value="100">100</option>
             </select>
         </div>
         <div class="form-group">
@@ -61,15 +61,27 @@
         <!-- Data are rendered here -->
     </tbody>
 </table>
+
+<div id="rankingPagination">
+    <a href="{% url 'results:ranking' %}">1</a>
+    <a href="{% url 'results:ranking' %}">2</a>
+    <a href="{% url 'results:ranking' %}">3</a>
+</div>
+
 {% endblock %}
 
 {% block script-foot %}
 <script>
 $("#filterForm").submit(function(event) {
     event.preventDefault();
-    $.get(rankingApi, $(this).serialize(), function(response) {
-        updateRankingTable(response["results"]);
-    });
+    preparePage($(this).serialize());
+    saveForm();
+});
+
+$("#rankingPagination a").click(function(event) {
+    event.preventDefault();
+    saveCurrentPage($(this).text());
+    window.open($(this).attr("href"), "_self");
 });
 </script>
 {% endblock %}

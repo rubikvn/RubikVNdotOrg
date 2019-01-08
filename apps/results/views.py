@@ -44,17 +44,11 @@ def api_ranking(request):
         elif category == "average":
             results = RankAverage.get_rank_average(eventid, query)
 
-        if not limit.isdigit() or not page.isdigit():
-            results = []
-        else:
-            limit = int(limit)
-            page = int(page)
+        p = Paginator(results, limit)
+        results = p.get_page(page)
 
-            p = Paginator(results, int(limit))
-            results = p.get_page(page)
-
-            f = ResultFormatter(results, "best", eventid, category)
-            results = list(f.format())
+        f = ResultFormatter(results, "best", eventid, category)
+        results = list(f.format())
 
         context = {
             "success" : True,
@@ -64,6 +58,7 @@ def api_ranking(request):
             "category": category,
             "query": query,
             "results": results,
+            "last_page": p.get_last_page(),
         }
 
     return JsonResponse(context)

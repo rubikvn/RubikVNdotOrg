@@ -22,12 +22,33 @@ function updateRankingTable(entries) {
     })
 }
 
-function preparePage() {
-    $.getJSON(rankingApi, function(response) {
+function saveForm() {
+    $("#filterForm").each(function(kv) {
+        sessionStorage.setItem(kv.name, kv.value);
+    })
+}
+
+function saveCurrentPage(index) {
+    sessionStorage.setItem("currentRankingPage", parseInt(index));
+}
+
+function preparePage(data) {
+    $.getJSON(rankingApi, data, function(response) {
         updateRankingTable(response["results"]);
     });
 }
 
 $(document).ready(function() {
-    preparePage();
-})
+    $("#filterForm").each(function(kv) {
+        kv.value = sessionStorage.getItem(kv.name);
+    });
+    var currentRankingPage = sessionStorage.getItem("currentRankingPage");
+    var data = $("#filterForm").serializeArray();
+    if (currentRankingPage !== null) {
+        data.push({
+            name: "page",
+            value: currentRankingPage,
+        })
+    }
+    preparePage($.param(data));
+});
