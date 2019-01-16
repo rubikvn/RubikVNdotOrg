@@ -1,25 +1,26 @@
-# RubikVN.org
+# RubikVN.org [![Build Status](https://travis-ci.com/RubikVN/RubikVNdotOrg.svg?branch=master)](https://travis-ci.com/RubikVN/RubikVNdotOrg)
 
 Source code for https://rubikvietnam.org/
-
-[![Build Status](https://travis-ci.com/RubikVN/RubikVNdotOrg.svg?branch=master)](https://travis-ci.com/RubikVN/RubikVNdotOrg)
-
 -----------------------------------------
+
 
 ## Getting involved
 
 Shoot me an email at <vttrung12@gmail.com> and tell me which part of the project you'd be interested in. Or simply clone this repo, make some changes, create a pull request. If approved, you will be invited to the team.
+
 
 ## Current progress
 
 * The website is temporarily unavailable for front-end remake and further development of our back-end. Any progress will be announced on this repository.
   * At the moment, our main focus is to design a user-friendly front-end.
 
+
 ## Implemented functions
 
 * Ranking display of speedcubers from Vietnam for all categories.
 * Login system via OAuth integration with WCA website.
 * TravisCI has been set up for this repository, which means we need more testing!
+
 
 ## Running the server locally
 
